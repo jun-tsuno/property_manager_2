@@ -19,6 +19,12 @@ module.exports = {
 		},
 		extend: {
 			colors: {
+				'image-blur': 'rgba(50, 50, 50, 0.2)',
+				gradient: {
+					var1: '#FF512F',
+					var2: '#DD2476',
+				},
+				// shadcn
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

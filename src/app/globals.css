@@ -79,3 +79,10 @@
 		font-feature-settings: 'rlig' 1, 'calt' 1;
 	}
 }
+
+@layer utilities {
+	.image-blur-right {
+		box-sizing: border-box;
+		box-shadow: inset 600px 0 350px -10px #998d6c72;
+	}
+}
