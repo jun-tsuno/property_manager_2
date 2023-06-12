@@ -22,9 +22,11 @@ const TopPage = () => {
 							Effortless Property Management: Simplify House Ownership and
 							Tenant Relations
 						</p>
-						<Button className='bg-gradient-to-r from-gradient-var1 to-gradient-var2 hover:brightness-110'>
-							<Link href={'/auth/login'}>Get Started</Link>
-						</Button>
+						<Link href={'/auth/login'}>
+							<Button className='bg-gradient-to-r from-gradient-var1 to-gradient-var2 hover:brightness-110'>
+								Get Started
+							</Button>
+						</Link>
 					</div>
 				</div>
 			</div>

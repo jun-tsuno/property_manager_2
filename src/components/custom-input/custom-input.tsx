@@ -15,10 +15,11 @@ interface CustomInputProps {
 	placeholder?: string;
 	form: UseFormReturn<any>;
 	description?: string;
+	type?: string;
 }
 
 const CustomInput = (props: CustomInputProps) => {
-	const { name, label, placeholder, form, description } = props;
+	const { name, label, placeholder, form, description, type } = props;
 
 	return (
 		<>
@@ -29,7 +30,12 @@ const CustomInput = (props: CustomInputProps) => {
 					<FormItem>
 						<FormLabel>{label}</FormLabel>
 						<FormControl>
-							<Input placeholder={placeholder} {...field} />
+							<Input
+								placeholder={placeholder}
+								{...field}
+								autoComplete='off'
+								type={type}
+							/>
 						</FormControl>
 						<FormDescription>{description}</FormDescription>
 						<FormMessage />

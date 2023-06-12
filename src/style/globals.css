@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 @layer base {
+	h1 {
+		@apply text-3xl;
+	}
+
+	h2 {
+		@apply text-2xl;
+	}
+
+	h3 {
+		@apply text-xl;
+	}
+
 	:root {
 		--background: 0 0% 100%;
 		--foreground: 222.2 47.4% 11.2%;
@@ -84,5 +96,9 @@
 	.image-blur-right {
 		box-sizing: border-box;
 		box-shadow: inset 600px 0 350px -10px #998d6c72;
+	}
+
+	.clip-border {
+		border-radius: 52% 48% 22% 78% / 53% 38% 62% 47%;
 	}
 }
