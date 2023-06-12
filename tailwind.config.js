@@ -19,7 +19,7 @@ module.exports = {
 		},
 		extend: {
 			colors: {
-				'image-blur': 'rgba(50, 50, 50, 0.2)',
+				'image-blur': 'rgba(50, 50, 50, 0.5)',
 				gradient: {
 					var1: '#FF512F',
 					var2: '#DD2476',
