@@ -19,6 +19,7 @@ module.exports = {
 		},
 		extend: {
 			colors: {
+				warning: '#f87171',
 				beige: '#FFF8D6',
 				'image-blur': 'rgba(50, 50, 50, 0.5)',
 				'image-blur-lighter': 'rgba(50, 50, 50, 0.4)',

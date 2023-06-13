@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -7,6 +8,7 @@ import FormInput from '@/components/custom-input/custom-input';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import axios from 'axios';
 
 const formSchema = z.object({
 	userName: z.string().min(1, { message: 'Invalid user name' }),
@@ -18,13 +20,25 @@ const formSchema = z.object({
 });
 
 const RegisterPage = () => {
+	const [passErr, setPassErr] = useState('');
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: { userName: '', email: '', password: '', passwordConf: '' },
 	});
 
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		console.log(values);
+	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		if (values.password !== values.passwordConf)
+			return setPassErr('Password Unmatched');
+
+		try {
+			const res = await axios.post('/api/register', { ...values });
+			if (res.status !== 200) return alert('Register failed');
+
+			setPassErr('');
+		} catch (error) {
+			console.log(error);
+			setPassErr('');
+		}
 	};
 
 	return (
@@ -57,6 +71,7 @@ const RegisterPage = () => {
 							label='Password Confirm'
 							type='password'
 						/>
+						{passErr && <p className='text-center text-warning'>{passErr}</p>}
 						<div className='text-center'>
 							<Button type='submit' className='w-[150px]'>
 								Register
@@ -72,6 +87,7 @@ const RegisterPage = () => {
 						width={0}
 						height={0}
 						sizes='100vh'
+						priority
 						className='w-full h-full object-cover'
 					/>
 					<div className='absolute inset-0 flex flex-col items-center justify-center bg-image-blur-lighter text-white'>

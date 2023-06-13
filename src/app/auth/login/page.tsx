@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -7,6 +8,8 @@ import FormInput from '@/components/custom-input/custom-input';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
 	email: z.string().email({ message: 'Invalid email address' }),
@@ -14,13 +17,32 @@ const formSchema = z.object({
 });
 
 const LoginPage = () => {
+	const [error, setError] = useState('');
+	const router = useRouter();
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: { email: '', password: '' },
 	});
 
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		console.log(values);
+	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		try {
+			const res = await signIn('credentials', {
+				redirect: false,
+				email: values.email,
+				password: values.password,
+			});
+
+			console.log(res);
+
+			if (!res?.error) {
+				router.push('/dashboard');
+			} else {
+				setError('Invalid email or password');
+			}
+		} catch (error) {
+			console.log(error);
+			setError('Something went wrong');
+		}
 	};
 
 	return (
@@ -46,6 +68,7 @@ const LoginPage = () => {
 							label='Password'
 							type='password'
 						/>
+						{error && <p className='text-center text-warning'>{error}</p>}
 						<div className='text-center'>
 							<Button type='submit' className='w-[150px]'>
 								Log In
