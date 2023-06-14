@@ -1,28 +1,37 @@
 import { prisma } from '@/lib/prisma';
-import { hash } from 'bcryptjs';
 import { NextResponse } from 'next/server';
 
-interface UserArg {
-  userName: string;
+interface TenantArg {
+  name: string;
   email: string;
-  password: string;
+  roomId?: number;
+  phone?: string;
+  fee: number;
+  startDate: Date;
+  endDate?: Date;
+  houseId: string;
 }
 
 export async function POST(req: Request) {
   try {
-    const { userName, email, password } = (await req.json()) as UserArg;
-    const hashed_pass = await hash(password, 12);
+    const { name, email, roomId, phone, fee, startDate, endDate, houseId } =
+      (await req.json()) as TenantArg;
 
-    const user = await prisma.owner.create({
+    const tenant = await prisma.tenant.create({
       data: {
-        name: userName,
-        email: email.toLowerCase(),
-        password: hashed_pass,
+        name,
+        email,
+        roomId,
+        phone,
+        fee,
+        startDate,
+        endDate,
+        houseId,
       },
     });
 
     return NextResponse.json({
-      user: { userName: user.name, email: user.email },
+      tenant: { ...tenant },
       message: 'Successfully Created',
     });
   } catch (error: unknown) {

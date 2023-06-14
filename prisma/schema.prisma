@@ -35,7 +35,7 @@ model Tenant {
   phone       String?
   fee         Int
   startDate   DateTime
-  endDate     DateTime
+  endDate     DateTime?
   house       House @relation(fields: [houseId], references: [id])
   houseId     String
 }
