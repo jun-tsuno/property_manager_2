@@ -2,9 +2,10 @@ import HouseCard from '@/components/house-card/house-card';
 import Layout from '@/components/layout/layout';
 import { Button } from '@/components/ui/button';
 import { authOptions } from '@/lib/auth';
+import { api } from '@/lib/axios';
 import { House, Owner } from '@prisma/client';
-import axios from 'axios';
 import { getServerSession } from 'next-auth/next';
+import Link from 'next/link';
 import { Fragment } from 'react';
 import HouseWithMan from '../../../public/svgIcon/house-man';
 
@@ -12,7 +13,7 @@ const DashboardPage = async () => {
   const session = await getServerSession(authOptions);
   const { id: ownerId } = session?.user as Owner;
 
-  const res = await axios.get(`http://localhost:3000/api/house?id=${ownerId}`);
+  const res = await api.get(`/api/house?id=${ownerId}`);
   const houseList = res.data.houseList as House[];
 
   return (
@@ -39,8 +40,10 @@ const DashboardPage = async () => {
             <p className='py-4'>No houses enrolled yet</p>
           </div>
         )}
-        <div className='text-center'>
-          <Button>Add a House</Button>
+        <div className='pb-20 text-center'>
+          <Link href={'/dashboard/add-house'}>
+            <Button>Add a House</Button>
+          </Link>
         </div>
       </Layout>
     </>

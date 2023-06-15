@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <>
-      <div className='shadow-md px-4 py-2 flex justify-between items-center'>
+      <div className='flex items-center justify-between bg-white px-4 py-2 shadow-md'>
         <div>header</div>
         <div className='flex'>
           <UserIcon />

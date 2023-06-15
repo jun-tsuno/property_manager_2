@@ -2,21 +2,21 @@ import Header from '../header/header';
 
 interface LayoutProps {
   children: React.ReactNode;
-  noMargin?: boolean;
-  noPadding?: boolean;
+  noPaddingX?: boolean;
+  noPaddingY?: boolean;
 }
 
 const Layout = (props: LayoutProps) => {
-  const { children, noMargin, noPadding } = props;
+  const { children, noPaddingX, noPaddingY } = props;
 
   return (
     <>
-      <div className='bg-secondary-light-gray fixed w-full z-50'>
+      <div className='bg-secondary-light-gray fixed z-50 w-full'>
         <Header />
       </div>
       <main
-        className={`mx-auto h-[100vh] ${noMargin ? '' : 'w-[90%]'}
-          ${noPadding ? '' : 'pt-16 pb-5'}`}
+        className={`mx-auto h-[100vh] ${noPaddingX ? '' : 'px-[calc(5%)]'}
+          ${noPaddingY ? '' : 'pb-5 pt-16'}`}
       >
         {children}
       </main>

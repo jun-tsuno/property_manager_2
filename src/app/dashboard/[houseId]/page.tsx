@@ -1,11 +1,13 @@
+import Layout from '@/components/layout/layout';
+
 const HouseDetail = ({ params }: { params: { houseId: string } }) => {
   const houseId = params.houseId;
 
-  console.log(houseId);
-
   return (
     <>
-      <h2>House Detail</h2>
+      <Layout>
+        <h2 className='py-5'>House Detail</h2>
+      </Layout>
     </>
   );
 };

@@ -8,15 +8,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import Link from 'next/link';
 import { Dispatch, SetStateAction } from 'react';
 
 interface DialogProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  handleCancel?: () => void;
 }
 
-const AddHouseDialog = ({ open, setOpen, handleCancel }: DialogProps) => {
+const AddHouseDialog = ({ open, setOpen }: DialogProps) => {
   return (
     <>
       <AlertDialog open={open} onOpenChange={setOpen}>
@@ -28,10 +28,10 @@ const AddHouseDialog = ({ open, setOpen, handleCancel }: DialogProps) => {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel onClick={handleCancel}>
-              Back to Home
-            </AlertDialogCancel>
-            <AlertDialogAction>Continue</AlertDialogAction>
+            <AlertDialogCancel>Add another house</AlertDialogCancel>
+            <Link href={'/dashboard/add-tenant'}>
+              <AlertDialogAction>Add Tenant</AlertDialogAction>
+            </Link>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
