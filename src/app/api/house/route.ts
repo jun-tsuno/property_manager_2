@@ -10,6 +10,7 @@ interface HouseArg {
   ownerId: string;
 }
 
+//  create a house
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
   const { id: ownerId } = session?.user as Owner;
@@ -42,6 +43,7 @@ export async function POST(req: Request) {
   }
 }
 
+// Get house list
 // /api/house?id=*****
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
