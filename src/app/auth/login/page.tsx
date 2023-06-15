@@ -45,19 +45,20 @@ const LoginPage = () => {
       }
     } catch (error) {
       setError('Something went wrong');
+      setLoading(false);
     }
   };
 
   return (
     <>
-      <div className='h-[100vh] flex flex-col md:flex-row-reverse'>
-        <div className='pt-20 pb-8 md:flex-[60%] md:self-center md:pt-0'>
-          <h1 className='text-center pb-5'>Login</h1>
+      <div className='flex h-[100vh] flex-col md:flex-row-reverse'>
+        <div className='pb-8 pt-20 md:flex-[60%] md:self-center md:pt-0'>
+          <h1 className='pb-5 text-center'>Login</h1>
           <CustomForm
             form={form}
             formSchema={formSchema}
             onSubmit={onSubmit}
-            className='w-[90%] mx-auto max-w-[400px]'
+            className='mx-auto w-[90%] max-w-[400px]'
           >
             <FormInput
               form={form}
@@ -88,11 +89,11 @@ const LoginPage = () => {
             height={0}
             sizes='100vh'
             priority
-            className='w-full h-full object-cover'
+            className='h-full w-full object-cover'
           />
           <div className='absolute inset-0 flex flex-col items-center justify-center bg-image-blur-lighter text-white'>
             <h2>New Here?</h2>
-            <p className='pt-10 pb-20 px-8'>
+            <p className='px-8 pb-20 pt-10'>
               Sign up free and start managing your properties.
             </p>
             <Link href={'/auth/register'}>
