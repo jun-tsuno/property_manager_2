@@ -17,11 +17,12 @@ interface CustomTableProps {
     name: string;
     roomId: number;
     fee: number;
-    endDate: string;
+    endDate: Date;
   }[];
+  houseId: string;
 }
 
-const CustomTable = ({ tenants }: CustomTableProps) => {
+const CustomTable = ({ tenants, houseId }: CustomTableProps) => {
   return (
     <>
       <Table>
@@ -51,7 +52,7 @@ const CustomTable = ({ tenants }: CustomTableProps) => {
                       {tenant.endDate ? dateFormat(tenant.endDate) : '-'}
                     </TableCell>
                     <TableCell>
-                      <Link href={`/dashboard/${tenant.id}`} as={''}>
+                      <Link href={`/dashboard/${houseId}/${tenant.id}`} as={''}>
                         <Button variant='link'>view</Button>
                       </Link>
                     </TableCell>

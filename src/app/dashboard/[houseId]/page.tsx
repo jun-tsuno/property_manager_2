@@ -1,3 +1,4 @@
+import BackButton from '@/components/back-button/back-button';
 import CustomTable from '@/components/custom-table/custom-table';
 import Layout from '@/components/layout/layout';
 import { api } from '@/lib/axios';
@@ -8,7 +9,7 @@ interface TenantInfo {
   name: string;
   roomId: number;
   fee: number;
-  endDate: string;
+  endDate: Date;
 }
 
 const HouseDetail = async ({ params }: { params: { houseId: string } }) => {
@@ -20,7 +21,10 @@ const HouseDetail = async ({ params }: { params: { houseId: string } }) => {
   return (
     <>
       <Layout>
-        <h2 className='py-5'>House Detail</h2>
+        <div className='flex items-center py-5 pl-3'>
+          <BackButton />
+          <h2 className='px-10'>House Detail</h2>
+        </div>
         <div className='rounded-sm bg-light-gray p-3 drop-shadow-md'>
           <h3 className='text-center'>{houseDetail?.houseName}</h3>
           <p className='flex items-center justify-center pt-1 text-sm'>
@@ -29,7 +33,10 @@ const HouseDetail = async ({ params }: { params: { houseId: string } }) => {
           </p>
         </div>
         <div className='py-10'>
-          <CustomTable tenants={houseDetail?.tenant as TenantInfo[]} />
+          <CustomTable
+            tenants={houseDetail?.tenant as TenantInfo[]}
+            houseId={houseId}
+          />
         </div>
       </Layout>
     </>

@@ -39,3 +39,4 @@ model Tenant {
   house       House @relation(fields: [houseId], references: [id])
   houseId     String
 }
+

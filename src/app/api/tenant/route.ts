@@ -12,6 +12,31 @@ interface TenantArg {
   houseId: string;
 }
 
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const tenantId = searchParams.get('id');
+
+  if (!tenantId) return NextResponse.json({ message: 'No such tenant' });
+
+  try {
+    const tenant = await prisma.tenant.findUnique({
+      where: { id: +tenantId },
+    });
+
+    return NextResponse.json({ tenant });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return new NextResponse(
+        JSON.stringify({
+          status: 'error',
+          message: error.message,
+        }),
+        { status: 500 },
+      );
+    }
+  }
+}
+
 export async function POST(req: Request) {
   try {
     const { name, email, roomId, phone, fee, startDate, endDate, houseId } =
