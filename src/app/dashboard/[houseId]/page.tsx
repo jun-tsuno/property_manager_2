@@ -28,27 +28,29 @@ const HouseDetail = async ({ params }: { params: { houseId: string } }) => {
           <BackButton to='/dashboard' />
           <h2 className='px-10'>House Detail</h2>
         </div>
-        <div className='rounded-sm bg-light-gray p-3 drop-shadow-md'>
-          <h3 className='text-center'>{houseDetail?.houseName}</h3>
-          <p className='flex items-center justify-center pt-1 text-sm'>
-            <LocationIcon />
-            <span className='pl-2'>{houseDetail?.location}</span>
-          </p>
-        </div>
-        <div className='py-10'>
-          <CustomTable
-            tenants={houseDetail?.tenant as TenantInfo[]}
-            houseId={houseId}
-          />
-        </div>
+        <div className='mx-auto max-w-[800px]'>
+          <div className='rounded-sm bg-light-gray p-3 drop-shadow-md'>
+            <h3 className='text-center'>{houseDetail?.houseName}</h3>
+            <p className='flex items-center justify-center pt-1 text-sm'>
+              <LocationIcon />
+              <span className='pl-2'>{houseDetail?.location}</span>
+            </p>
+          </div>
+          <div className='py-10'>
+            <CustomTable
+              tenants={houseDetail?.tenant as TenantInfo[]}
+              houseId={houseId}
+            />
+          </div>
 
-        <div className='flex justify-center gap-3 pt-7 sm:gap-10'>
-          <Link href={`/dashboard/${houseId}/add-tenant`}>
-            <Button className='bg-green text-black hover:bg-green hover:brightness-110'>
-              Add Tenant
-            </Button>
-          </Link>
-          <DeleteHouseDialog />
+          <div className='flex justify-center gap-3 pt-7 sm:gap-10'>
+            <Link href={`/dashboard/${houseId}/add-tenant`}>
+              <Button className='bg-green text-black hover:bg-green hover:brightness-110'>
+                Add Tenant
+              </Button>
+            </Link>
+            <DeleteHouseDialog houseId={houseId} />
+          </div>
         </div>
       </Layout>
     </>

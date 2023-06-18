@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/table';
 import { dateFormat } from '@/helper/dateFormat';
 import Link from 'next/link';
+import { Fragment } from 'react';
 import { Button } from '../ui/button';
 
 interface CustomTableProps {
@@ -41,8 +42,8 @@ const CustomTable = ({ tenants, houseId }: CustomTableProps) => {
             tenants.length > 0 &&
             tenants.map((tenant) => {
               return (
-                <>
-                  <TableRow key={tenant.id}>
+                <Fragment key={tenant.id}>
+                  <TableRow>
                     <TableCell className='font-medium'>
                       {tenant.roomId || '-'}
                     </TableCell>
@@ -57,7 +58,7 @@ const CustomTable = ({ tenants, houseId }: CustomTableProps) => {
                       </Link>
                     </TableCell>
                   </TableRow>
-                </>
+                </Fragment>
               );
             })}
         </TableBody>

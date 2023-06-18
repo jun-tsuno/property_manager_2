@@ -36,3 +36,28 @@ export async function GET(req: Request) {
     }
   }
 }
+
+export async function DELETE(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const houseId = searchParams.get('id');
+
+  if (!houseId) return NextResponse.json({ message: 'No such house' });
+
+  try {
+    await prisma.house.delete({
+      where: { id: houseId },
+    });
+
+    return NextResponse.json(true);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return new NextResponse(
+        JSON.stringify({
+          status: 'error',
+          message: error.message,
+        }),
+        { status: 500 },
+      );
+    }
+  }
+}

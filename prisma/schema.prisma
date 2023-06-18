@@ -22,13 +22,13 @@ model House {
   id          String @id @default(uuid())
   houseName   String
   location    String
-  owner       Owner @relation(fields: [ownerId], references: [id])
+  owner       Owner @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId     String
   tenant      Tenant[]
 }
 
 model Tenant {
-  id          Int @id @default(autoincrement())
+  id          String @id @default(uuid())
   name        String
   email       String
   roomId      Int?
@@ -36,7 +36,7 @@ model Tenant {
   fee         Int
   startDate   DateTime
   endDate     DateTime?
-  house       House @relation(fields: [houseId], references: [id])
+  house       House @relation(fields: [houseId], references: [id], onDelete: Cascade)
   houseId     String
 }
 

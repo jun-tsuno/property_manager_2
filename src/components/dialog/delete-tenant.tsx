@@ -23,8 +23,6 @@ const DeleteTenantDialog = ({ tenantId, houseId }: DialogProps) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  console.log(houseId);
-
   const handleDelete = async () => {
     try {
       setLoading(true);
@@ -57,7 +55,7 @@ const DeleteTenantDialog = ({ tenantId, houseId }: DialogProps) => {
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Remove Tenant??</AlertDialogTitle>
+            <AlertDialogTitle>Remove Tenant?</AlertDialogTitle>
             <AlertDialogDescription>
               Tenant information will be deleted permanently.
             </AlertDialogDescription>

@@ -1,12 +1,11 @@
 'use client';
-import CustomDialog from '@/components/custom-dialog/custom-dialog';
 import CustomForm from '@/components/custom-form/custom-form';
 import CustomInput from '@/components/custom-input/custom-input';
+import AddHouseDialog from '@/components/dialog/add-house';
 import Layout from '@/components/layout/layout';
 import { Button } from '@/components/ui/button';
 import { api } from '@/lib/axios';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -20,11 +19,6 @@ const AddHousePage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const router = useRouter();
-
-  const toAddTenant = () => {
-    router.push('/dashboard/create/add-tenant');
-  };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -71,15 +65,7 @@ const AddHousePage = () => {
           </CustomForm>
         </div>
 
-        <CustomDialog
-          open={open}
-          setOpen={setOpen}
-          title='Successfully Added!'
-          description=' Do you want to proceed to add the tenants?'
-          cancelTitle='Add another house'
-          action={toAddTenant}
-          actionTitle='Add Tenant'
-        />
+        <AddHouseDialog open={open} setOpen={setOpen} />
       </Layout>
     </>
   );

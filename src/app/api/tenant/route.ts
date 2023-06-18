@@ -20,7 +20,7 @@ export async function GET(req: Request) {
 
   try {
     const tenant = await prisma.tenant.findUnique({
-      where: { id: +tenantId },
+      where: { id: tenantId },
     });
 
     return NextResponse.json({ tenant });
@@ -80,7 +80,7 @@ export async function DELETE(req: Request) {
     if (!tenantId) return NextResponse.json({ message: 'No such tenant' });
 
     await prisma.tenant.delete({
-      where: { id: +tenantId },
+      where: { id: tenantId },
     });
 
     return NextResponse.json({ message: 'Successfully deleted' });
