@@ -71,3 +71,28 @@ export async function POST(req: Request) {
     }
   }
 }
+
+export async function DELETE(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const tenantId = searchParams.get('id');
+
+    if (!tenantId) return NextResponse.json({ message: 'No such tenant' });
+
+    await prisma.tenant.delete({
+      where: { id: +tenantId },
+    });
+
+    return NextResponse.json({ message: 'Successfully deleted' });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return new NextResponse(
+        JSON.stringify({
+          status: 'error',
+          message: error.message,
+        }),
+        { status: 500 },
+      );
+    }
+  }
+}

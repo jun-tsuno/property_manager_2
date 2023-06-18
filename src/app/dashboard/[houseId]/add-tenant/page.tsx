@@ -1,5 +1,5 @@
-import AddTenantForm from '@/components/Form/AddTenantForm';
 import BackButton from '@/components/back-button/back-button';
+import AddTenantForm from '@/components/form/AddTenantForm';
 import Layout from '@/components/layout/layout';
 
 const AddTenantPage = ({ params }: { params: { houseId: string } }) => {

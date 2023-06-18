@@ -1,5 +1,6 @@
 import BackButton from '@/components/back-button/back-button';
 import CustomTable from '@/components/custom-table/custom-table';
+import DeleteHouseDialog from '@/components/dialog/delete-house';
 import Layout from '@/components/layout/layout';
 import { Button } from '@/components/ui/button';
 import { api } from '@/lib/axios';
@@ -47,9 +48,7 @@ const HouseDetail = async ({ params }: { params: { houseId: string } }) => {
               Add Tenant
             </Button>
           </Link>
-          <Button variant='secondary' className='hover:text-destructive'>
-            Delete House
-          </Button>
+          <DeleteHouseDialog />
         </div>
       </Layout>
     </>
