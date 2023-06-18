@@ -22,14 +22,15 @@ module.exports = {
         'light-gray': '#F0F0F0',
         warning: '#f87171',
         beige: '#FFF8D6',
-        'image-blur': 'rgba(50, 50, 50, 0.5)',
-        'image-blur-lighter': 'rgba(50, 50, 50, 0.4)',
+        green: '#BFDB38',
         gradient: {
           var1: '#FF512F', // red1
           var2: '#DD2476', // red2
           var3: '#d946ef', // purple1
           var4: '#9333ea', // purple2
         },
+        'image-blur': 'rgba(50, 50, 50, 0.5)',
+        'image-blur-lighter': 'rgba(50, 50, 50, 0.4)',
         // shadcn
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

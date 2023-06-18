@@ -41,7 +41,7 @@ const DashboardPage = async () => {
           </div>
         )}
         <div className='pb-20 text-center'>
-          <Link href={'/dashboard/add-house'}>
+          <Link href={'/dashboard/create/add-house'}>
             <Button>Add a House</Button>
           </Link>
         </div>

@@ -29,7 +29,7 @@ const AddHouseDialog = ({ open, setOpen }: DialogProps) => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Add another house</AlertDialogCancel>
-            <Link href={'/dashboard/add-tenant'}>
+            <Link href={'/dashboard/create/add-tenant'}>
               <AlertDialogAction>Add Tenant</AlertDialogAction>
             </Link>
           </AlertDialogFooter>

@@ -7,8 +7,12 @@ import CalenderIcon from '../../../../../public/svgIcon/calender';
 import DollarIcon from '../../../../../public/svgIcon/dollar';
 import UserIcon from '../../../../../public/svgIcon/user';
 
-const TenantPage = async ({ params }: { params: { tenantId: string } }) => {
-  const tenantId = params.tenantId;
+const TenantPage = async ({
+  params,
+}: {
+  params: { houseId: string; tenantId: string };
+}) => {
+  const { tenantId, houseId } = params;
 
   const res = await api.get(`/api/tenant?id=${tenantId}`);
   const tenant = res.data.tenant as Tenant;
@@ -20,7 +24,7 @@ const TenantPage = async ({ params }: { params: { tenantId: string } }) => {
     <>
       <Layout>
         <div className='flex items-center pb-5 pl-3 pt-8'>
-          <BackButton />
+          <BackButton to={`/dashboard/${houseId}`} />
           <h2 className='px-10'>Tenant Detail</h2>
         </div>
         <div className='mx-auto flex max-w-[850px] flex-col items-center md:flex-row md:items-start md:justify-around'>

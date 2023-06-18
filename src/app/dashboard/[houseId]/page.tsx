@@ -1,7 +1,9 @@
 import BackButton from '@/components/back-button/back-button';
 import CustomTable from '@/components/custom-table/custom-table';
 import Layout from '@/components/layout/layout';
+import { Button } from '@/components/ui/button';
 import { api } from '@/lib/axios';
+import Link from 'next/link';
 import LocationIcon from '../../../../public/svgIcon/location';
 
 interface TenantInfo {
@@ -22,7 +24,7 @@ const HouseDetail = async ({ params }: { params: { houseId: string } }) => {
     <>
       <Layout>
         <div className='flex items-center py-5 pl-3'>
-          <BackButton />
+          <BackButton to='/dashboard' />
           <h2 className='px-10'>House Detail</h2>
         </div>
         <div className='rounded-sm bg-light-gray p-3 drop-shadow-md'>
@@ -37,6 +39,17 @@ const HouseDetail = async ({ params }: { params: { houseId: string } }) => {
             tenants={houseDetail?.tenant as TenantInfo[]}
             houseId={houseId}
           />
+        </div>
+
+        <div className='flex justify-center gap-3 pt-7 sm:gap-10'>
+          <Link href={`/dashboard/${houseId}/add-tenant`}>
+            <Button className='bg-green text-black hover:bg-green hover:brightness-110'>
+              Add Tenant
+            </Button>
+          </Link>
+          <Button variant='secondary' className='hover:text-destructive'>
+            Delete House
+          </Button>
         </div>
       </Layout>
     </>
