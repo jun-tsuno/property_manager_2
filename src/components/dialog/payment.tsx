@@ -60,6 +60,7 @@ const PaymentDialog = ({ tenantId, hasPaid }: DialogProps) => {
         setError('Something went wrong. Fail to delete.');
       }
     } catch (error) {
+      setLoading(false);
       setError('Something went wrong on server. Fail to delete.');
     }
   };

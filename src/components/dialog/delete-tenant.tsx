@@ -10,6 +10,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { api } from '@/lib/axios';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '../ui/button';
@@ -21,6 +22,7 @@ interface DialogProps {
 
 const DeleteTenantDialog = ({ tenantId, houseId }: DialogProps) => {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleDelete = async () => {
@@ -32,13 +34,14 @@ const DeleteTenantDialog = ({ tenantId, houseId }: DialogProps) => {
       setLoading(false);
 
       if (res.status === 200) {
+        router.refresh();
         router.push(`/dashboard/${houseId}`);
       } else {
-        console.log('fail');
+        setError('Something went wrong. Fail to delete.');
       }
     } catch (error) {
       setLoading(false);
-      console.log('error');
+      setError('Something went wrong on server. Fail to delete.');
     }
   };
 
@@ -54,18 +57,29 @@ const DeleteTenantDialog = ({ tenantId, houseId }: DialogProps) => {
           </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Remove Tenant?</AlertDialogTitle>
-            <AlertDialogDescription>
-              Tenant information will be deleted permanently.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <Button onClick={handleDelete} disabled={loading}>
-              {loading ? 'Deleting...' : ' Remove Tenant'}
-            </Button>
-          </AlertDialogFooter>
+          {!error ? (
+            <>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Remove Tenant?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Tenant information will be deleted permanently.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <Button onClick={handleDelete} disabled={loading}>
+                  {loading ? 'Deleting...' : ' Remove Tenant'}
+                </Button>
+              </AlertDialogFooter>
+            </>
+          ) : (
+            <>
+              <h3 className='text-destructive'>{error}</h3>
+              <Link href={'/dashboard'}>
+                <Button>Back to dashboard</Button>
+              </Link>
+            </>
+          )}
         </AlertDialogContent>
       </AlertDialog>
     </>

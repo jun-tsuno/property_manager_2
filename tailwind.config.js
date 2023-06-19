@@ -19,6 +19,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        navy: '#213555',
         'light-gray': '#F0F0F0',
         warning: '#f87171',
         beige: '#FFF8D6',

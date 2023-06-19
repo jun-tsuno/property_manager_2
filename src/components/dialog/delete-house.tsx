@@ -33,6 +33,7 @@ const DeleteHouseDialog = ({ houseId }: DialogProps) => {
       setLoading(false);
 
       if (res.status === 200) {
+        router.refresh();
         router.push(`/dashboard`);
       } else {
         setError('Something went wrong. Fail to delete.');

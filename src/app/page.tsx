@@ -29,6 +29,37 @@ const TopPage = () => {
             </Link>
           </div>
         </div>
+        <div className='px-[5%] pb-28 pt-28'>
+          <div className='flex flex-col items-center gap-8 md:flex-row-reverse md:justify-center md:gap-20'>
+            <div className='relative max-w-[730px]'>
+              <Image
+                src={'/image/demo-2.png'}
+                alt='demo'
+                width={0}
+                height={0}
+                sizes='100vh'
+                priority
+                className='mx-auto w-[80%] shadow-xl shadow-black/30 md:w-[90%]'
+              />
+              <Image
+                src={'/image/demo-1.png'}
+                alt='demo'
+                width={0}
+                height={0}
+                sizes='100vh'
+                priority
+                className='absolute top-[-10%] w-[30%] shadow-xl shadow-black/30 md:w-1/3 '
+              />
+            </div>
+            <div className='w-[80%] max-w-[500px] bg-navy px-5 py-20 text-center text-white'>
+              <h2 className='pb-5'>Manage your tenants</h2>
+              <p>
+                You can register your house information and its tenant detail.
+                No need to keep track of their monthly fee on paper.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
