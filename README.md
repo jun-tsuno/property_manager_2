@@ -1,34 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Property Management App
 
-## Getting Started
+<p style="text-align: center">
+<img width="600" alt="Screenshot" src="https://github.com/jun-tsuno/mysql_note_app/assets/110567844/2b5c615b-5c8d-4910-bb8c-f22284a29620">
+</p>
 
-First, run the development server:
+Rental housing and shared housing are very widespread in Canada. Some of those owners have multiple homes in various locations, which must be a hassle to manage the renters and whether or not they pay the monthly rent charge. This app is for those who want to smartly handle and manage their properties! No more paper!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+https://rent-management-2.vercel.app/
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Built With
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- `Nextjs: 13.4.3`
+- `next-auth`
+- `TypeScript`
+- `Prisma`
+- `PostgreSQL`
+- `zod`
+- `shadcn UI`
+- `tailwindCSS`
 
-## Learn More
+## Feature
 
-To learn more about Next.js, take a look at the following resources:
+- Add, Delete, Update house/tenant information.
+- Keep record of payment history of this month.
+- Utilize modern web development tools. Enable full stack development even faster and easier.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Challenge
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Figuring out the best approach for using client or server components takes some serious thought. In my strategy, I go for server components whenever there's an API involved, so we can fetch data smoothly and efficiently.
+- This is a revised version of my previous work. I changed database structure (Firebase to PostgreSQL) to interact with the DB easier and in more organized way.
+- I used 'prisma/client' for the type definitions, which allows for secure type casting between database and components.
