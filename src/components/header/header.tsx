@@ -1,7 +1,8 @@
 'use client';
 import { signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
+import DashboardIcon from '../../../public/svgIcon/dashboard';
 import LogoutIcon from '../../../public/svgIcon/logout';
-import UserIcon from '../../../public/svgIcon/user';
 import { Button } from '../ui/button';
 
 const Header = () => {
@@ -11,9 +12,16 @@ const Header = () => {
   return (
     <>
       <div className='flex items-center justify-between bg-white px-4 py-2 shadow-md'>
-        <div>header</div>
-        <div className='flex'>
-          <UserIcon />
+        <Link href='/' className='font-lobster text-xl'>
+          Rent
+        </Link>
+        <div className='flex items-center'>
+          <Link
+            href='/dashboard'
+            className='rounded-full p-2 hover:bg-light-gray hover:drop-shadow-xl'
+          >
+            <DashboardIcon />
+          </Link>
           <p className='pl-3'>{userName}</p>
         </div>
         <Button variant='ghost' onClick={() => signOut()}>

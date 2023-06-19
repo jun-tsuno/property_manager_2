@@ -21,6 +21,9 @@ export async function GET(req: Request) {
   try {
     const tenant = await prisma.tenant.findUnique({
       where: { id: tenantId },
+      include: {
+        payment: { select: { id: true } },
+      },
     });
 
     return NextResponse.json({ tenant });

@@ -19,7 +19,7 @@ const DashboardPage = async () => {
   return (
     <>
       <Layout>
-        <h1>Your House List</h1>
+        <h2 className='py-5'>Your House List</h2>
         {houseList.length > 0 ? (
           <div className='flex flex-wrap justify-center gap-4 py-14'>
             {houseList.map((house) => {

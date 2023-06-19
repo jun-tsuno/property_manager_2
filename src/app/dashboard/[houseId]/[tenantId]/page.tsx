@@ -3,7 +3,7 @@ import DeleteTenantDialog from '@/components/dialog/delete-tenant';
 import Layout from '@/components/layout/layout';
 import TenantCard from '@/components/tenant-card/tenant-card';
 import { api } from '@/lib/axios';
-import { Tenant } from '@prisma/client';
+import { TenantWithPayment } from '@/types/types';
 import UserIcon from '../../../../../public/svgIcon/user';
 
 const TenantPage = async ({
@@ -14,7 +14,7 @@ const TenantPage = async ({
   const { tenantId, houseId } = params;
 
   const res = await api.get(`/api/tenant?id=${tenantId}`);
-  const tenant = res.data.tenant as Tenant;
+  const tenant = res.data.tenant as TenantWithPayment;
 
   return (
     <>
@@ -25,7 +25,7 @@ const TenantPage = async ({
               <BackButton to={`/dashboard/${houseId}`} />
               <h2 className='px-10'>Tenant Detail</h2>
             </div>
-            <div className='mx-auto flex max-w-[850px] flex-col items-center md:flex-row md:items-start md:justify-around'>
+            <div className='mx-auto flex max-w-[1000px] flex-col items-center md:flex-row md:items-start md:justify-around'>
               <div className='pt-8'>
                 <UserIcon
                   width={120}

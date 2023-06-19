@@ -38,5 +38,12 @@ model Tenant {
   endDate     DateTime?
   house       House @relation(fields: [houseId], references: [id], onDelete: Cascade)
   houseId     String
+  payment     Payment[]
+}
+
+model Payment {
+  id    Int @id @default(autoincrement())
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenantId  String @unique
 }
 
