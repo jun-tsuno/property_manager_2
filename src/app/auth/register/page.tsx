@@ -47,6 +47,11 @@ const RegisterPage = () => {
     <>
       <div className='flex h-[100vh] flex-col md:flex-row'>
         <div className='pb-8 pt-20 md:flex-[60%] md:self-center md:pt-0'>
+          <div className='mb-8 text-center font-lobster'>
+            <Link href={'/'} className='rounded-md bg-light-gray p-1 text-xl'>
+              Rent
+            </Link>
+          </div>
           <h1 className='pb-5 text-center'>Register</h1>
           <CustomForm
             form={form}

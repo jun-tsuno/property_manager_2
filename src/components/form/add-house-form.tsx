@@ -2,7 +2,6 @@
 import CustomForm from '@/components/custom-form/custom-form';
 import CustomInput from '@/components/custom-input/custom-input';
 import AddHouseDialog from '@/components/dialog/add-house';
-import Layout from '@/components/layout/layout';
 import { Button } from '@/components/ui/button';
 import { api } from '@/lib/axios';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -11,11 +10,11 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 const formSchema = z.object({
-  houseName: z.string().min(1, { message: 'Should be more than 1 characters' }),
-  location: z.string().min(1, { message: 'Should be more than 1 characters' }),
+  houseName: z.string().min(1, { message: 'Required' }),
+  location: z.string().min(1, { message: 'Required' }),
 });
 
-const AddHousePage = () => {
+const AddHouseForm = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -50,25 +49,28 @@ const AddHousePage = () => {
 
   return (
     <>
-      <Layout>
-        <h2 className='pt-5'>Add house</h2>
-        <div className='mx-auto w-[80%] max-w-[400px] py-12'>
-          <CustomForm form={form} formSchema={formSchema} onSubmit={onSubmit}>
-            <CustomInput form={form} name='houseName' label='House Name' />
-            <CustomInput form={form} name='location' label='Location' />
-            <div className='text-center'>
-              <Button type='submit'>
-                {!loading ? 'Submit' : 'Please Wait ...'}
-              </Button>
-              {error && <p className='py-3 font-bold text-warning'>{error}</p>}
-            </div>
-          </CustomForm>
-        </div>
+      <h2 className='pt-5'>Add house</h2>
+      <div className='mx-auto w-[80%] max-w-[400px] py-12'>
+        <CustomForm form={form} formSchema={formSchema} onSubmit={onSubmit}>
+          <CustomInput
+            form={form}
+            name='houseName'
+            label='House Name'
+            withFlag
+          />
+          <CustomInput form={form} name='location' label='Location' withFlag />
+          <div className='text-center'>
+            <Button type='submit'>
+              {!loading ? 'Submit' : 'Please Wait ...'}
+            </Button>
+            {error && <p className='py-3 font-bold text-warning'>{error}</p>}
+          </div>
+        </CustomForm>
+      </div>
 
-        <AddHouseDialog open={open} setOpen={setOpen} />
-      </Layout>
+      <AddHouseDialog open={open} setOpen={setOpen} />
     </>
   );
 };
 
-export default AddHousePage;
+export default AddHouseForm;
