@@ -20,10 +20,12 @@ module.exports = {
     extend: {
       colors: {
         navy: '#213555',
-        'light-gray': '#F0F0F0',
+        gray: '#B2B2B2',
+        'dark-gray': '#7B8FA1',
         warning: '#f87171',
         beige: '#FFF8D6',
         green: '#BFDB38',
+        'pastel-green': '#cce3de',
         gradient: {
           var1: '#FF512F', // red1
           var2: '#DD2476', // red2

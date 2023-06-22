@@ -5,6 +5,7 @@ import CustomInput from '@/components/custom-input/custom-input';
 import { Button } from '@/components/ui/button';
 import { api } from '@/lib/axios';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -25,7 +26,9 @@ const formSchema = z.object({
 
 const AddTenantForm = ({ houseId }: AddTenantFormProps) => {
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -52,8 +55,9 @@ const AddTenantForm = ({ houseId }: AddTenantFormProps) => {
       setLoading(false);
 
       if (res.status === 200) {
+        router.refresh();
         form.reset();
-        console.log('added');
+        setSuccess('Added successfully!');
       } else {
         setError('Fail to Create a house');
       }
@@ -118,7 +122,16 @@ const AddTenantForm = ({ houseId }: AddTenantFormProps) => {
           <Button type='submit'>
             {!loading ? 'Submit' : 'Please Wait ...'}
           </Button>
-          {error && <p className='py-3 font-bold text-warning'>{error}</p>}
+          {error && (
+            <p className='mx-auto mt-3 w-1/2 rounded-full bg-warning py-1 font-bold'>
+              {error}
+            </p>
+          )}
+          {success && (
+            <p className='mx-auto mt-3 w-1/2 rounded-full bg-green py-1 font-bold'>
+              {success}
+            </p>
+          )}
         </div>
       </CustomForm>
     </>

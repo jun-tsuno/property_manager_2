@@ -1,12 +1,10 @@
+import AddHouseForm from '@/components/form/add-house-form';
 import HouseCard from '@/components/house-card/house-card';
 import Layout from '@/components/layout/layout';
-import { Button } from '@/components/ui/button';
 import { authOptions } from '@/lib/auth';
 import { api } from '@/lib/axios';
 import { House, Owner } from '@prisma/client';
 import { getServerSession } from 'next-auth/next';
-import Link from 'next/link';
-import { Fragment } from 'react';
 import HouseWithMan from '../../../public/svgIcon/house-man';
 
 const DashboardPage = async () => {
@@ -19,31 +17,36 @@ const DashboardPage = async () => {
   return (
     <>
       <Layout>
-        <h2 className='py-5'>Your House List</h2>
-        {houseList.length > 0 ? (
-          <div className='flex flex-wrap justify-center gap-4 py-14'>
-            {houseList.map((house) => {
-              return (
-                <Fragment key={house.id}>
-                  <HouseCard
-                    houseId={house.id}
-                    houseName={house.houseName}
-                    location={house.location}
-                  />
-                </Fragment>
-              );
-            })}{' '}
+        <div className='mx-auto my-10 flex max-w-[1200px] flex-col lg:flex-row'>
+          <div className='grow'>
+            <h2 className='py-5'>Your House List</h2>
+            {houseList.length > 0 ? (
+              <div className='flex min-w-[400px] overflow-x-scroll py-14 lg:flex-wrap lg:justify-center lg:overflow-hidden'>
+                {houseList.map((house) => {
+                  return (
+                    <div
+                      key={house.id}
+                      className='mx-3 my-4 aspect-video  min-w-[350px] cursor-pointer rounded-md shadow-md shadow-black/30 hover:border-2 hover:border-gradient-var4'
+                    >
+                      <HouseCard
+                        houseId={house.id}
+                        houseName={house.houseName}
+                        location={house.location}
+                      />
+                    </div>
+                  );
+                })}{' '}
+              </div>
+            ) : (
+              <div className='flex flex-col items-center py-16'>
+                <HouseWithMan width={100} height={100} />
+                <p className='py-4'>No houses enrolled yet</p>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className='flex flex-col items-center py-16'>
-            <HouseWithMan width={100} height={100} />
-            <p className='py-4'>No houses enrolled yet</p>
+          <div className='min-w-[300px] lg:ml-5 lg:min-w-[400px] lg:border-l-2 lg:border-gray lg:pl-8'>
+            <AddHouseForm />
           </div>
-        )}
-        <div className='pb-20 text-center'>
-          <Link href={'/dashboard/add-house'}>
-            <Button>Add a House</Button>
-          </Link>
         </div>
       </Layout>
     </>

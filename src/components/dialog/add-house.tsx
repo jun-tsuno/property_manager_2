@@ -1,14 +1,15 @@
+'use client';
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction } from 'react';
+import CheckIcon from '../../../public/svgIcon/check';
 
 interface DialogProps {
   open: boolean;
@@ -16,18 +17,20 @@ interface DialogProps {
 }
 
 const AddHouseDialog = ({ open, setOpen }: DialogProps) => {
+  const router = useRouter();
+
   return (
     <>
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Successfully Added!</AlertDialogTitle>
+            <CheckIcon className='mx-auto' />
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Add another house</AlertDialogCancel>
-            <Link href={'/dashboard/'}>
-              <AlertDialogAction>Back to Dashboard</AlertDialogAction>
-            </Link>
+            <AlertDialogAction onClick={() => router.refresh()}>
+              Back to Dashboard
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

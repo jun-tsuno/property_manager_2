@@ -61,12 +61,19 @@ const DeleteHouseDialog = ({ houseId }: DialogProps) => {
               <AlertDialogHeader>
                 <AlertDialogTitle>Delete House?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  House information will be deleted permanently.
+                  House information will be{' '}
+                  <span className='font-bold underline'>
+                    deleted permanently.
+                  </span>
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <Button onClick={handleDelete} disabled={loading}>
+                <Button
+                  variant='destructive'
+                  onClick={handleDelete}
+                  disabled={loading}
+                >
                   {loading ? 'Deleting...' : 'Delete House'}
                 </Button>
               </AlertDialogFooter>
