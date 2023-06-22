@@ -9,7 +9,8 @@
     "lint": "next lint",
     "push": "prisma db push",
     "migrate": "prisma migrate dev --preview-feature",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "prepare": "husky install"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"commonjs\"} prisma/seed.ts"
@@ -49,6 +50,8 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
     "prettier-plugin-organize-imports": "^3.2.2",
     "prettier-plugin-tailwindcss": "^0.3.0",
