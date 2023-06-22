@@ -18,7 +18,7 @@ const DashboardPage = async () => {
     <>
       <Layout>
         <div className='mx-auto my-10 flex max-w-[1200px] flex-col lg:flex-row'>
-          <div>
+          <div className='grow'>
             <h2 className='py-5'>Your House List</h2>
             {houseList.length > 0 ? (
               <div className='flex min-w-[400px] overflow-x-scroll py-14 lg:flex-wrap lg:justify-center lg:overflow-hidden'>
@@ -44,7 +44,7 @@ const DashboardPage = async () => {
               </div>
             )}
           </div>
-          <div className='ml-5 min-w-[400px] lg:border-l-2 lg:border-gray lg:pl-8'>
+          <div className='min-w-[300px] lg:ml-5 lg:min-w-[400px] lg:border-l-2 lg:border-gray lg:pl-8'>
             <AddHouseForm />
           </div>
         </div>

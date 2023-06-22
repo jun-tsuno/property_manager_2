@@ -1,6 +1,7 @@
 import BackButton from '@/components/back-button/back-button';
 import AddTenantForm from '@/components/form/add-tenant-form';
 import Layout from '@/components/layout/layout';
+import PeoplePicture from '../../../../../public/svgIcon/people';
 
 const AddTenantPage = ({ params }: { params: { houseId: string } }) => {
   const houseId = params.houseId;
@@ -12,8 +13,13 @@ const AddTenantPage = ({ params }: { params: { houseId: string } }) => {
           <BackButton to={`/dashboard/${houseId}`} />
           <h2 className='px-10'>Add Tenant</h2>
         </div>
-        <div className='mx-auto w-[80%] max-w-[500px] py-12'>
-          <AddTenantForm houseId={houseId} />
+        <div className='flex max-w-[1300px] flex-col lg:flex-row lg:justify-center'>
+          <div className='mx-auto max-w-[700px] rounded-md px-10 py-12 shadow-lg shadow-black/40'>
+            <AddTenantForm houseId={houseId} />
+          </div>
+          <div className='hidden py-8 sm:block sm:w-[300px] xl:w-[400px]'>
+            <PeoplePicture />
+          </div>
         </div>
       </Layout>
     </>

@@ -29,7 +29,7 @@ const HouseDetail = async ({ params }: { params: { houseId: string } }) => {
           <h2 className='px-10'>House Detail</h2>
         </div>
         <div className='mx-auto max-w-[800px]'>
-          <div className='rounded-sm bg-light-gray p-3 drop-shadow-md'>
+          <div className='bg-light-gray rounded-sm p-3 drop-shadow-md'>
             <h3 className='text-center'>{houseDetail?.houseName}</h3>
             <p className='flex items-center justify-center pt-1 text-sm'>
               <LocationIcon />

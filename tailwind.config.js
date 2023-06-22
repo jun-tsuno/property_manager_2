@@ -25,6 +25,7 @@ module.exports = {
         warning: '#f87171',
         beige: '#FFF8D6',
         green: '#BFDB38',
+        'pastel-green': '#cce3de',
         gradient: {
           var1: '#FF512F', // red1
           var2: '#DD2476', // red2
