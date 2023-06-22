@@ -1,5 +1,5 @@
-import { Tenant } from '@prisma/client';
+import { Payment, Tenant } from '@prisma/client';
 
-export interface TenantWithPayment extends Tenant {
-  payment: { id: string }[];
-}
+export type TenantWithPayment = Tenant & {
+  payment: Pick<Payment, 'id'>[];
+};
