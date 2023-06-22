@@ -32,3 +32,8 @@ https://rent-management-2.vercel.app/
 - Figuring out the best approach for using client or server components takes some serious thought. In my strategy, I go for server components whenever there's an API involved, so we can fetch data smoothly and efficiently.
 - This is a revised version of my previous work. I changed database structure (Firebase to PostgreSQL) to interact with the DB easier and in more organized way.
 - I used 'prisma/client' for the type definitions, which allows for secure type casting between database and components.
+
+## Upcoming
+
+- Image upload
+- Unit/Integration test
