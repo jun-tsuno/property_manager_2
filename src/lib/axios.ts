@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'https://rent-management-2.vercel.app/',
+  baseURL: process.env.API_URL || 'http://localhost:3000',
 });
