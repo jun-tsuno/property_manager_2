@@ -30,7 +30,7 @@ const TenantPage = async ({
                 <UserIcon
                   width={120}
                   height={120}
-                  className='rounded-full bg-light-gray p-3 shadow-lg shadow-black/20'
+                  className='bg-light-gray rounded-full p-3 shadow-lg shadow-black/20'
                 />
                 <h3 className='p-3 text-center'>{tenant.name}</h3>
               </div>
