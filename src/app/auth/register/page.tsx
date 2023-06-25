@@ -32,14 +32,13 @@ const RegisterPage = () => {
       return setPassErr('Password Unmatched');
 
     try {
-      const res = await axios.post('/api/register', { ...values });
-      if (res.status !== 200) return alert('Register failed');
+      await axios.post('/api/register', { ...values });
 
       setPassErr('');
       signIn(undefined, { callbackUrl: '/' });
     } catch (error) {
       console.log(error);
-      setPassErr('');
+      setPassErr('Fail to register user.');
     }
   };
 
@@ -48,7 +47,7 @@ const RegisterPage = () => {
       <div className='flex h-[100vh] flex-col md:flex-row'>
         <div className='pb-8 pt-20 md:flex-[60%] md:self-center md:pt-0'>
           <div className='mb-8 text-center font-lobster'>
-            <Link href={'/'} className='rounded-md bg-light-gray p-1 text-xl'>
+            <Link href={'/'} className='bg-light-gray rounded-md p-1 text-xl'>
               Rent
             </Link>
           </div>
