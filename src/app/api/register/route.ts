@@ -13,6 +13,20 @@ export async function POST(req: Request) {
     const { userName, email, password } = (await req.json()) as UserArg;
     const hashed_pass = await hash(password, 12);
 
+    const userExist = await prisma.owner.findUnique({
+      where: { email: email },
+    });
+
+    if (userExist) {
+      return new NextResponse(
+        JSON.stringify({
+          status: 'error',
+          message: 'User already exist',
+        }),
+        { status: 400 },
+      );
+    }
+
     const user = await prisma.owner.create({
       data: {
         name: userName,
