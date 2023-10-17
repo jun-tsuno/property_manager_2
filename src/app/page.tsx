@@ -22,7 +22,7 @@ const TopPage = () => {
               Effortless Property Management: Simplify House Ownership and
               Tenant Relations
             </p>
-            <Link href={'/auth/login'}>
+            <Link href={'/login'}>
               <Button className='bg-gradient-to-r from-gradient-var1 to-gradient-var2 hover:brightness-110'>
                 Get Started
               </Button>
@@ -38,7 +38,6 @@ const TopPage = () => {
                 width={0}
                 height={0}
                 sizes='100vh'
-                priority
                 className='mx-auto w-[80%] shadow-xl shadow-black/30 md:w-[90%]'
               />
               <Image
@@ -47,7 +46,6 @@ const TopPage = () => {
                 width={0}
                 height={0}
                 sizes='100vh'
-                priority
                 className='absolute top-[-10%] w-[30%] shadow-xl shadow-black/30 md:w-1/3 '
               />
             </div>

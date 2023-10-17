@@ -4,7 +4,7 @@ import Layout from '@/components/layout/layout';
 import TenantCard from '@/components/tenant-card/tenant-card';
 import { api } from '@/lib/axios';
 import { TenantWithPayment } from '@/types/types';
-import UserIcon from '../../../../../public/svgIcon/user';
+import UserIcon from '../../../../../../public/svgIcon/user';
 
 const TenantPage = async ({
   params,

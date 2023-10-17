@@ -1,6 +1,5 @@
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { Owner } from '@prisma/client';
 import { getServerSession } from 'next-auth/next';
 import { NextResponse } from 'next/server';
 
@@ -13,7 +12,7 @@ interface HouseArg {
 //  create a house
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
-  const { id: ownerId } = session?.user as Owner;
+  const ownerId = session?.user.ownerId;
 
   try {
     const { houseName, location } = (await req.json()) as HouseArg;
@@ -22,7 +21,7 @@ export async function POST(req: Request) {
       data: {
         houseName: houseName,
         location: location,
-        ownerId: ownerId,
+        ownerId: ownerId!,
       },
     });
 
@@ -44,7 +43,6 @@ export async function POST(req: Request) {
 }
 
 // Get house list
-// /api/house?id=*****
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const ownerId = searchParams.get('id');

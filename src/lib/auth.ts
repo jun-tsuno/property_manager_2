@@ -1,14 +1,26 @@
 import { compare } from 'bcryptjs';
 import type { NextAuthOptions } from 'next-auth';
+import { DefaultSession } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { prisma } from './prisma';
 
+declare module 'next-auth' {
+  interface Session extends DefaultSession {
+    user: {
+      ownerId: string;
+      name: string;
+      email: string;
+    };
+  }
+}
+
 export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: '/auth/login',
+    signIn: '/login',
   },
   session: {
     strategy: 'jwt',
+    maxAge: process.env.NODE_ENV === 'development' ? 60 * 60 * 24 : 60 * 15,
   },
   providers: [
     CredentialsProvider({
@@ -40,25 +52,24 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           email: user.email,
           name: user.name,
-          randomKey: 'dddb84ca19081f24c5a9a192b2de2c3a',
         };
       },
     }),
   ],
   callbacks: {
-    session: ({ session, token }) => {
+    async session({ session, token }) {
       return {
         ...session,
-        user: { ...session.user, id: token.id, randomKey: token.randomKey },
+        user: { name: token.name, email: token.email, ownerId: token.id },
       };
     },
-    jwt: ({ token, user }) => {
+    jwt({ token, user }) {
       if (user) {
-        const u = user as unknown as any;
         return {
           ...token,
-          id: u.id,
-          randomKey: u.randomKey,
+          id: user.id,
+          name: user.name,
+          email: user.email,
         };
       }
       return token;

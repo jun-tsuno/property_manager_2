@@ -5,7 +5,7 @@ import Layout from '@/components/layout/layout';
 import { Button } from '@/components/ui/button';
 import { api } from '@/lib/axios';
 import Link from 'next/link';
-import LocationIcon from '../../../../public/svgIcon/location';
+import LocationIcon from '../../../../../public/svgIcon/location';
 
 interface TenantInfo {
   id: string;

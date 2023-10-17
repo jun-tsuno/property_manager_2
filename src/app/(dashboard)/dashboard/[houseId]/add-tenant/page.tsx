@@ -1,7 +1,7 @@
 import BackButton from '@/components/back-button/back-button';
 import AddTenantForm from '@/components/form/add-tenant-form';
 import Layout from '@/components/layout/layout';
-import PeoplePicture from '../../../../../public/svgIcon/people';
+import PeoplePicture from '../../../../../../public/svgIcon/people';
 
 const AddTenantPage = ({ params }: { params: { houseId: string } }) => {
   const houseId = params.houseId;

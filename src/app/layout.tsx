@@ -1,6 +1,6 @@
 import '@/style/globals.css';
 import { Lobster, Montserrat } from 'next/font/google';
-import { NextAuthProvider } from './provider';
+import { Provider } from './provider';
 
 const montserrat = Montserrat({
   weight: ['400', '600'],
@@ -14,8 +14,12 @@ const lobster = Lobster({
 });
 
 export const metadata = {
-  title: 'Rent',
-  description: 'Manage your properties - rent management app',
+  title: {
+    default: 'Rent',
+    template: '%s | Rent',
+  },
+  description:
+    'Manage your properties. Rental house and its tenant management app for house owners.',
 };
 
 export default function RootLayout({
@@ -26,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${lobster.variable} ${montserrat.variable}`}>
-        <NextAuthProvider>{children}</NextAuthProvider>
+        <Provider>{children}</Provider>
       </body>
     </html>
   );
