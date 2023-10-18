@@ -1,7 +1,8 @@
 'use client';
-import HouseCard from '@/components/house-card/house-card';
+import HouseCard from '@/components/house-card/HouseCard';
+import { ManWithHouse } from '@/components/icons';
+import AddHouseModal from '@/components/modal/AddHouseModal';
 import { useFetchHouses } from '@/hooks/useFetchHouses';
-import HouseWithMan from '../../../../public/svgIcon/house-man';
 
 const HouseList = () => {
   const { data: houses, isLoading, isError } = useFetchHouses();
@@ -16,32 +17,30 @@ const HouseList = () => {
 
   return (
     <>
-      <div className='grow'>
-        <h2 className='py-5'>Your House List</h2>
+      <section className='grow'>
+        <h2 className='flex items-center gap-4 py-5'>
+          <span>Your House List</span>
+          <AddHouseModal />
+        </h2>
+
         {houses.length > 0 ? (
-          <div className='flex min-w-[400px] overflow-x-scroll py-14 lg:flex-wrap lg:justify-center lg:overflow-hidden'>
-            {houses.map((house) => {
-              return (
-                <div
-                  key={house.id}
-                  className='mx-3 my-4 aspect-video  min-w-[350px] cursor-pointer rounded-md shadow-md shadow-black/30 hover:border-2 hover:border-gradient-var4'
-                >
-                  <HouseCard
-                    houseId={house.id}
-                    houseName={house.houseName}
-                    location={house.location}
-                  />
-                </div>
-              );
-            })}{' '}
+          <div className='flex max-w-[1060px] gap-6 overflow-x-scroll px-4 pb-8 pt-6'>
+            {houses.map((house) => (
+              <HouseCard
+                key={house.id}
+                houseId={house.id}
+                houseName={house.houseName}
+                location={house.location}
+              />
+            ))}
           </div>
         ) : (
           <div className='flex flex-col items-center py-16'>
-            <HouseWithMan width={100} height={100} />
+            <ManWithHouse className='h-[100px] w-[100px]' />
             <p className='py-4'>No houses enrolled yet</p>
           </div>
         )}
-      </div>
+      </section>
     </>
   );
 };
