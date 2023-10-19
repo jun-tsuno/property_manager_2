@@ -21,7 +21,7 @@ const CustomForm = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className={`space-y-8 ${className}`}
+          className={`${className ? className : ''}`}
         >
           {children}
         </form>

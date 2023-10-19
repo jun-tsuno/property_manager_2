@@ -3,19 +3,17 @@ import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth/next';
 import { NextResponse } from 'next/server';
 
-interface HouseArg {
-  houseName: string;
-  location: string;
-  ownerId: string;
-}
-
 //  create a house
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
-  const ownerId = session?.user.ownerId;
+  const { houseName, location } = await req.json();
 
   try {
-    const { houseName, location } = (await req.json()) as HouseArg;
+    if (!session) {
+      throw new Error('Not Authorized');
+    }
+
+    const ownerId = session?.user.ownerId;
 
     const house = await prisma.house.create({
       data: {
@@ -25,19 +23,14 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json({
-      house: { ...house },
-      message: 'Successfully Created',
-    });
+    return Response.json(house);
   } catch (error: unknown) {
     if (error instanceof Error) {
-      return new NextResponse(
-        JSON.stringify({
-          status: 'error',
-          message: error.message,
-        }),
-        { status: 500 },
-      );
+      console.log(error);
+      return Response.json(error, {
+        status: 500,
+        statusText: error.message,
+      });
     }
   }
 }

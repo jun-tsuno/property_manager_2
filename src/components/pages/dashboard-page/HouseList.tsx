@@ -2,9 +2,14 @@
 import HouseCard from '@/components/house-card/HouseCard';
 import { ManWithHouse } from '@/components/icons';
 import AddHouseModal from '@/components/modal/AddHouseModal';
-import { useFetchHouses } from '@/hooks/useFetchHouses';
+import { useFetchHouses } from '@/hooks/use-fetch-houses';
 
-const HouseList = () => {
+interface HouseListProps {
+  selectedHouse: string | null;
+  handleSelectHouse: (id: string) => void;
+}
+
+const HouseList = ({ selectedHouse, handleSelectHouse }: HouseListProps) => {
   const { data: houses, isLoading, isError } = useFetchHouses();
 
   if (isLoading) {
@@ -28,9 +33,10 @@ const HouseList = () => {
             {houses.map((house) => (
               <HouseCard
                 key={house.id}
-                houseId={house.id}
                 houseName={house.houseName}
                 location={house.location}
+                onClick={() => handleSelectHouse(house.id)}
+                isSelected={selectedHouse === house.id}
               />
             ))}
           </div>

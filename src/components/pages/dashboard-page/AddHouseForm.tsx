@@ -3,7 +3,7 @@ import CustomForm from '@/components/custom-form/custom-form';
 import CustomInput from '@/components/custom-input/custom-input';
 import AddHouseDialog from '@/components/dialog/add-house';
 import { Button } from '@/components/ui/button';
-import { api } from '@/lib/axios';
+import { nextAPI } from '@/lib/axios';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -28,7 +28,7 @@ const AddHouseForm = () => {
     try {
       setLoading(true);
 
-      const res = await api.post('/api/house', {
+      const res = await nextAPI.post('/api/house', {
         houseName: values.houseName,
         location: values.location,
       });

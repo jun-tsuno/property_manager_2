@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import { Button } from '../ui/button';
 
-interface CustomTableProps {
+interface TenantTebleProps {
   tenants: {
     id: string;
     name: string;
@@ -23,7 +23,7 @@ interface CustomTableProps {
   houseId: string;
 }
 
-const CustomTable = ({ tenants, houseId }: CustomTableProps) => {
+const TenantTable = ({ tenants, houseId }: TenantTebleProps) => {
   return (
     <>
       <Table>
@@ -67,4 +67,4 @@ const CustomTable = ({ tenants, houseId }: CustomTableProps) => {
   );
 };
 
-export default CustomTable;
+export default TenantTable;

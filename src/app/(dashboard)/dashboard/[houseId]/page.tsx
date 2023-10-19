@@ -1,9 +1,8 @@
 import BackButton from '@/components/back-button/back-button';
-import CustomTable from '@/components/custom-table/custom-table';
 import DeleteHouseDialog from '@/components/dialog/delete-house';
 import Layout from '@/components/layout/layout';
 import { Button } from '@/components/ui/button';
-import { api } from '@/lib/axios';
+import { nextAPI } from '@/lib/axios';
 import Link from 'next/link';
 import LocationIcon from '../../../../../public/svgIcon/location';
 
@@ -18,7 +17,7 @@ interface TenantInfo {
 const HouseDetail = async ({ params }: { params: { houseId: string } }) => {
   const houseId = params.houseId;
 
-  const res = await api.get(`/api/house-detail?id=${houseId}`);
+  const res = await nextAPI.get(`/house-detail?id=${houseId}`);
   const houseDetail = res.data.houseDetail;
 
   return (
@@ -37,10 +36,10 @@ const HouseDetail = async ({ params }: { params: { houseId: string } }) => {
             </p>
           </div>
           <div className='py-10'>
-            <CustomTable
+            {/* <CustomTable
               tenants={houseDetail?.tenant as TenantInfo[]}
               houseId={houseId}
-            />
+            /> */}
           </div>
 
           <div className='flex justify-center gap-3 pt-7 sm:gap-10'>

@@ -18,10 +18,20 @@ interface CustomInputProps {
   description?: string;
   type?: string;
   withFlag?: boolean;
+  className?: string;
 }
 
 const CustomInput = (props: CustomInputProps) => {
-  const { name, label, placeholder, form, description, type, withFlag } = props;
+  const {
+    name,
+    label,
+    placeholder,
+    form,
+    description,
+    type,
+    withFlag,
+    className,
+  } = props;
 
   return (
     <>
@@ -29,7 +39,7 @@ const CustomInput = (props: CustomInputProps) => {
         control={form.control}
         name={name}
         render={({ field }) => (
-          <FormItem className='w-full'>
+          <FormItem className={`w-full ${className ? className : ''}`}>
             <FormLabel className='flex items-center'>
               {label} <i className='px-2'>{withFlag && <WarnIcon />}</i>
             </FormLabel>
