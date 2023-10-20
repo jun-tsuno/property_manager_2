@@ -1,33 +1,22 @@
 'use client';
 import HouseCard from '@/components/house-card/HouseCard';
 import { ManWithHouse } from '@/components/icons';
-import AddHouseModal from '@/components/modal/AddHouseModal';
-import { useFetchHouses } from '@/hooks/use-fetch-houses';
+import { House } from '@prisma/client';
 
 interface HouseListProps {
+  houses: House[];
   selectedHouse: string | null;
   handleSelectHouse: (id: string) => void;
 }
 
-const HouseList = ({ selectedHouse, handleSelectHouse }: HouseListProps) => {
-  const { data: houses, isLoading, isError } = useFetchHouses();
-
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
-
-  if (isError) {
-    return <div>error</div>;
-  }
-
+const HouseList = ({
+  houses,
+  selectedHouse,
+  handleSelectHouse,
+}: HouseListProps) => {
   return (
     <>
-      <section className='grow'>
-        <h2 className='flex items-center gap-4 py-5'>
-          <span>Your House List</span>
-          <AddHouseModal />
-        </h2>
-
+      <div className='grow'>
         {houses.length > 0 ? (
           <div className='flex max-w-[1060px] gap-6 overflow-x-scroll px-4 pb-8 pt-6'>
             {houses.map((house) => (
@@ -43,10 +32,12 @@ const HouseList = ({ selectedHouse, handleSelectHouse }: HouseListProps) => {
         ) : (
           <div className='flex flex-col items-center py-16'>
             <ManWithHouse className='h-[100px] w-[100px]' />
-            <p className='py-4'>No houses enrolled yet</p>
+            <p className='py-4 text-sm text-slate-400'>
+              No houses enrolled yet
+            </p>
           </div>
         )}
-      </section>
+      </div>
     </>
   );
 };
