@@ -1,23 +1,22 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import BackIcon from '../../../public/svgIcon/back';
+import Link from 'next/link';
+import { ChevronIcon } from '../icons';
 
 interface BackButtonProps {
-  to: string;
+  href: string;
+  label: string;
   className?: string;
 }
 
-const BackButton = ({ to, className }: BackButtonProps) => {
-  const router = useRouter();
-
+const BackButton = ({ href, label, className }: BackButtonProps) => {
   return (
     <>
-      <div
-        className={`w-8 rounded-full border border-black p-1 hover:cursor-pointer hover:bg-light-gray ${className}`}
-        onClick={() => router.push(to)}
+      <Link
+        href={href}
+        className={`flex items-center gap-1 hover:underline ${className}`}
       >
-        <BackIcon />
-      </div>
+        <ChevronIcon className='h-6 w-6' />
+        {label}
+      </Link>
     </>
   );
 };

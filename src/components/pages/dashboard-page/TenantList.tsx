@@ -1,35 +1,41 @@
-'use client';
-import { HouseIcon } from '@/components/icons';
-import { useFetchHouse } from '@/hooks/use-fetch-house';
+import { ChevronIcon } from '@/components/icons';
+import TenantTable from '@/components/table/TenantTable';
+import { dateFormat } from '@/utils/dateFormat';
+import { Tenant } from '@prisma/client';
+import Link from 'next/link';
 
 interface TenantListProps {
-  selectedHouse: string | null;
+  tenants: Tenant[];
 }
 
-const TenantList = ({ selectedHouse }: TenantListProps) => {
-  const { data: house, isLoading, isError } = useFetchHouse(selectedHouse);
-  const tenants = house?.tenant;
-
-  if (isLoading) return <div>loading...</div>;
-
-  if (isError) return <div>error...</div>;
-
+const TenantList = ({ tenants }: TenantListProps) => {
   return (
     <>
-      <section>
-        <h3 className='flex items-center gap-2 font-bold'>
-          <HouseIcon className='h-6 w-6' />
-          {house?.houseName}
-        </h3>
+      {/* for mobile */}
+      <ul className='grid gap-4 sm:hidden'>
+        {tenants.length > 0 &&
+          tenants.map((tenant) => (
+            <li
+              key={tenant.id}
+              className='flex items-center justify-between gap-2 border-[2px] border-slate-200 bg-slate-100 px-4 py-2 shadow-lg'
+            >
+              <div className='space-y-2'>
+                <p className='font-bold'>{tenant.name}</p>
+                <p className='text-sm'>{`Room: ${tenant.roomId || ''}`}</p>
+                <p className='text-sm'>{`Fee: $${tenant.fee}/month`}</p>
+                <p className='text-sm'>{`End Date: ${
+                  dateFormat(tenant.endDate) || '-'
+                }`}</p>
+              </div>
+              <Link href={`/dashboard/${tenant.houseId}/${tenant.id}`}>
+                <ChevronIcon className='h-8 w-8 rotate-180 hover:scale-110' />
+              </Link>
+            </li>
+          ))}
+      </ul>
 
-        {tenants && tenants?.length > 0 ? (
-          <div></div>
-        ) : (
-          <div className='py-16 text-center'>
-            <p className='font-bold text-slate-400'>No tenants</p>
-          </div>
-        )}
-      </section>
+      {/* for desktop */}
+      <TenantTable tenants={tenants} className='max-sm:hidden' />
     </>
   );
 };

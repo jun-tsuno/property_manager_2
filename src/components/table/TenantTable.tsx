@@ -1,33 +1,26 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { dateFormat } from '@/helper/dateFormat';
+import { dateFormat } from '@/utils/dateFormat';
+import { Tenant } from '@prisma/client';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { Button } from '../ui/button';
 
-interface TenantTebleProps {
-  tenants: {
-    id: string;
-    name: string;
-    roomId: number;
-    fee: number;
-    endDate: Date;
-  }[];
-  houseId: string;
+interface TenantTableProps {
+  tenants: Tenant[];
+  className?: string;
 }
 
-const TenantTable = ({ tenants, houseId }: TenantTebleProps) => {
+const TenantTable = ({ tenants, className }: TenantTableProps) => {
   return (
     <>
-      <Table>
-        <TableCaption>A list of the Tenants.</TableCaption>
+      <Table className={`${className ? className : ''}`}>
         <TableHeader>
           <TableRow>
             <TableHead>Room</TableHead>
@@ -53,8 +46,8 @@ const TenantTable = ({ tenants, houseId }: TenantTebleProps) => {
                       {tenant.endDate ? dateFormat(tenant.endDate) : '-'}
                     </TableCell>
                     <TableCell>
-                      <Link href={`/dashboard/${houseId}/${tenant.id}`} as={''}>
-                        <Button variant='link'>view</Button>
+                      <Link href={`/dashboard/${tenant.houseId}/${tenant.id}`}>
+                        <Button variant='secondary'>view</Button>
                       </Link>
                     </TableCell>
                   </TableRow>

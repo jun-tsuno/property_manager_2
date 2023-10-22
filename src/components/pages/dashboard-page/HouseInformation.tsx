@@ -1,10 +1,12 @@
 'use client';
+import FetchError from '@/components/error/FetchError';
 import { HouseSelect } from '@/components/icons';
+import Loading from '@/components/loading/Loading';
 import AddHouseModal from '@/components/modal/AddHouseModal';
 import { useFetchHouses } from '@/hooks/use-fetch-houses';
 import { useEffect, useState } from 'react';
 import HouseList from './HouseList';
-import TenantList from './TenantList';
+import TenantListSection from './TenantListSection';
 
 const HouseInformation = () => {
   const [selectedHouse, setSelectedHouse] = useState<string>('');
@@ -23,11 +25,11 @@ const HouseInformation = () => {
   };
 
   if (isLoading) {
-    return <div>loading...</div>;
+    return <Loading withText />;
   }
 
   if (isError) {
-    return <div>error</div>;
+    return <FetchError />;
   }
 
   return (
@@ -47,7 +49,7 @@ const HouseInformation = () => {
       <section>
         <h2 className='flex items-center gap-4 py-5'>Tenant List</h2>
         {selectedHouse ? (
-          <TenantList selectedHouse={selectedHouse} />
+          <TenantListSection selectedHouse={selectedHouse} />
         ) : (
           <div className='flex flex-col items-center gap-4 py-16'>
             <HouseSelect className='aspect-auto w-[150px]' />

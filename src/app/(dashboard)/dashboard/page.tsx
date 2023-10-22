@@ -7,7 +7,9 @@ export const metadata = {
 const DashboardPage = async () => {
   return (
     <>
-      <HouseInformation />
+      <div className='mb-8 md:mb-16'>
+        <HouseInformation />
+      </div>
     </>
   );
 };

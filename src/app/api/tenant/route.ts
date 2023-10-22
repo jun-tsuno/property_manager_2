@@ -1,50 +1,48 @@
 import { prisma } from '@/lib/prisma';
+import { checkAuthentication } from '@/utils/check-auth';
 import { NextResponse } from 'next/server';
 
-interface TenantArg {
-  name: string;
-  email: string;
-  roomId?: number;
-  phone?: string;
-  fee: number;
-  startDate: Date;
-  endDate?: Date;
-  houseId: string;
-}
-
 export async function GET(req: Request) {
+  const isAuthenticated = await checkAuthentication();
   const { searchParams } = new URL(req.url);
   const tenantId = searchParams.get('id');
 
-  if (!tenantId) return NextResponse.json({ message: 'No such tenant' });
+  if (!isAuthenticated) {
+    throw new Error('Not Authenticated');
+  }
+
+  if (!tenantId)
+    return Response.json('Tenant id is not defined', {
+      status: 400,
+      statusText: 'Bad Request',
+    });
 
   try {
     const tenant = await prisma.tenant.findUnique({
       where: { id: tenantId },
-      include: {
-        payment: { select: { id: true } },
-      },
     });
 
-    return NextResponse.json({ tenant });
+    return Response.json(tenant);
   } catch (error: unknown) {
     if (error instanceof Error) {
-      return new NextResponse(
-        JSON.stringify({
-          status: 'error',
-          message: error.message,
-        }),
-        { status: 500 },
-      );
+      return Response.json(error, {
+        status: 500,
+        statusText: 'Cannot find a tenant',
+      });
     }
   }
 }
 
 export async function POST(req: Request) {
-  try {
-    const { name, email, roomId, phone, fee, startDate, endDate, houseId } =
-      (await req.json()) as TenantArg;
+  const isAuthenticated = await checkAuthentication();
+  const { name, email, roomId, phone, fee, startDate, endDate, houseId } =
+    await req.json();
 
+  if (!isAuthenticated) {
+    throw new Error('Not Authorized');
+  }
+
+  try {
     const tenant = await prisma.tenant.create({
       data: {
         name,
@@ -58,19 +56,14 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json({
-      tenant: { ...tenant },
-      message: 'Successfully Created',
-    });
+    return Response.json(tenant);
   } catch (error: unknown) {
     if (error instanceof Error) {
-      return new NextResponse(
-        JSON.stringify({
-          status: 'error',
-          message: error.message,
-        }),
-        { status: 500 },
-      );
+      console.log(error);
+      return Response.json(error, {
+        status: 500,
+        statusText: error.message,
+      });
     }
   }
 }

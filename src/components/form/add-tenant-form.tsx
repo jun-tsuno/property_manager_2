@@ -3,12 +3,13 @@ import DatePicker from '@/components/custom-date-picker/DatePicker';
 import CustomForm from '@/components/custom-form/custom-form';
 import CustomInput from '@/components/custom-input/custom-input';
 import { Button } from '@/components/ui/button';
-import { api } from '@/lib/axios';
+import { useAddTenant } from '@/hooks/use-add-tenant';
+import { useFetchHouse } from '@/hooks/use-fetch-house';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { HouseIcon } from '../icons';
 
 interface AddTenantFormProps {
   houseId: string;
@@ -26,9 +27,9 @@ const formSchema = z.object({
 
 const AddTenantForm = ({ houseId }: AddTenantFormProps) => {
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const { data: house, isError } = useFetchHouse(houseId);
+  const addTenantMutation = useAddTenant(houseId);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,31 +46,36 @@ const AddTenantForm = ({ houseId }: AddTenantFormProps) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      setLoading(true);
-
-      const res = await api.post('/api/tenant', {
-        ...values,
+      await addTenantMutation.mutateAsync({
+        name: values.name,
+        email: values.email,
+        roomId: values.roomId,
+        phone: values.phone,
+        fee: values.fee,
+        startDate: values.startDate,
+        endDate: values.endDate,
         houseId,
       });
 
-      setLoading(false);
-
-      if (res.status === 200) {
-        router.refresh();
-        form.reset();
-        setSuccess('Added successfully!');
-      } else {
-        setError('Fail to Create a house');
-      }
+      form.reset();
     } catch (error) {
-      setError('Something went wrong');
-      setLoading(false);
+      setError('Fail to add a tenant');
     }
   };
 
   return (
     <>
-      <CustomForm form={form} formSchema={formSchema} onSubmit={onSubmit}>
+      <div className='mb-6 flex items-center justify-center gap-2'>
+        <HouseIcon className='h-4 w-4' />
+        {house && <p className='text-sm font-bold'>{house.houseName}</p>}
+      </div>
+
+      <CustomForm
+        form={form}
+        formSchema={formSchema}
+        onSubmit={onSubmit}
+        className='space-y-4'
+      >
         <CustomInput
           form={form}
           name='name'
@@ -77,7 +83,7 @@ const AddTenantForm = ({ houseId }: AddTenantFormProps) => {
           placeholder='John Smith'
           withFlag
         />
-        <div className='flex flex-col gap-5 sm:flex-row sm:justify-evenly'>
+        <div className='flex flex-col gap-4 sm:flex-row sm:justify-evenly'>
           <CustomInput
             form={form}
             name='email'
@@ -92,7 +98,7 @@ const AddTenantForm = ({ houseId }: AddTenantFormProps) => {
             placeholder='XXX-XXX-XXXX'
           />
         </div>
-        <div className='flex flex-col gap-5 sm:flex-row'>
+        <div className='flex flex-col gap-4 sm:flex-row'>
           <CustomInput
             form={form}
             name='roomId'
@@ -108,7 +114,7 @@ const AddTenantForm = ({ houseId }: AddTenantFormProps) => {
             withFlag
           />
         </div>
-        <div className='flex flex-col gap-5 sm:flex-row'>
+        <div className='flex flex-col gap-4 sm:flex-row'>
           <DatePicker
             form={form}
             name='startDate'
@@ -125,11 +131,6 @@ const AddTenantForm = ({ houseId }: AddTenantFormProps) => {
           {error && (
             <p className='mx-auto mt-3 w-1/2 rounded-full bg-warning py-1 font-bold'>
               {error}
-            </p>
-          )}
-          {success && (
-            <p className='mx-auto mt-3 w-1/2 rounded-full bg-green py-1 font-bold'>
-              {success}
             </p>
           )}
         </div>

@@ -1,7 +1,6 @@
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth/next';
-import { NextResponse } from 'next/server';
 
 //  create a house
 export async function POST(req: Request) {
@@ -36,31 +35,31 @@ export async function POST(req: Request) {
 }
 
 // Get house list
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const ownerId = searchParams.get('id');
+// export async function GET(req: Request) {
+//   const { searchParams } = new URL(req.url);
+//   const ownerId = searchParams.get('id');
 
-  if (!ownerId) return NextResponse.json({ message: 'No such owner' });
+//   if (!ownerId) return NextResponse.json({ message: 'No such owner' });
 
-  try {
-    const houseList = await prisma.house.findMany({
-      where: {
-        ownerId: ownerId,
-      },
-    });
+//   try {
+//     const houseList = await prisma.house.findMany({
+//       where: {
+//         ownerId: ownerId,
+//       },
+//     });
 
-    return NextResponse.json({
-      houseList,
-    });
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      return new NextResponse(
-        JSON.stringify({
-          status: 'error',
-          message: error.message,
-        }),
-        { status: 500 },
-      );
-    }
-  }
-}
+//     return NextResponse.json({
+//       houseList,
+//     });
+//   } catch (error: unknown) {
+//     if (error instanceof Error) {
+//       return new NextResponse(
+//         JSON.stringify({
+//           status: 'error',
+//           message: error.message,
+//         }),
+//         { status: 500 },
+//       );
+//     }
+//   }
+// }

@@ -1,4 +1,3 @@
-import BackButton from '@/components/back-button/back-button';
 import DeleteHouseDialog from '@/components/dialog/delete-house';
 import Layout from '@/components/layout/layout';
 import { Button } from '@/components/ui/button';
@@ -24,7 +23,7 @@ const HouseDetail = async ({ params }: { params: { houseId: string } }) => {
     <>
       <Layout>
         <div className='flex items-center py-5 pl-3'>
-          <BackButton to='/dashboard' />
+          {/* <BackButton to='/dashboard' /> */}
           <h2 className='px-10'>House Detail</h2>
         </div>
         <div className='mx-auto max-w-[800px]'>

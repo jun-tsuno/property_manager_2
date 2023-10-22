@@ -24,6 +24,7 @@ export async function GET(
             roomId: true,
             fee: true,
             endDate: true,
+            houseId: true,
           },
         },
       },

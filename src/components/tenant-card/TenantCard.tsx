@@ -1,5 +1,5 @@
-import { dateFormat } from '@/helper/dateFormat';
 import { TenantWithPayment } from '@/types/types';
+import { dateFormat } from '@/utils/dateFormat';
 import { format } from 'date-fns';
 import CalenderIcon from '../../../public/svgIcon/calender';
 import DollarIcon from '../../../public/svgIcon/dollar';
@@ -21,7 +21,7 @@ const TenantCard = ({ tenant }: TenantCardProps) => {
 
   return (
     <>
-      <div className='rounded-md bg-light-gray px-8 py-14 shadow-lg shadow-black/30 md:w-[50%] md:max-w-[600px]'>
+      <div className='bg-light-gray rounded-md px-8 py-14 shadow-lg shadow-black/30 md:w-[50%] md:max-w-[600px]'>
         <div className='space-y-1'>
           <p className='flex items-center'>
             <DoorIcon />

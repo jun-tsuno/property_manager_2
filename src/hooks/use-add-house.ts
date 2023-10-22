@@ -7,7 +7,7 @@ type Args = {
 };
 
 const addHouse = async ({ houseName, location }: Args) => {
-  const res = await nextAPI.post('/hose', {
+  const res = await nextAPI.post('/house', {
     houseName,
     location,
   });
