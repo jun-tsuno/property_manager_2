@@ -4,9 +4,11 @@ import { HouseSelect } from '@/components/icons';
 import Loading from '@/components/loading/Loading';
 import AddHouseModal from '@/components/modal/AddHouseModal';
 import { useFetchHouses } from '@/hooks/use-fetch-houses';
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import HouseList from './HouseList';
 import TenantListSection from './TenantListSection';
+const CustomToast = dynamic(() => import('@/components/toast/CustomToast'));
 
 const HouseInformation = () => {
   const [selectedHouse, setSelectedHouse] = useState<string>('');
@@ -57,6 +59,8 @@ const HouseInformation = () => {
           </div>
         )}
       </section>
+
+      <CustomToast />
     </>
   );
 };

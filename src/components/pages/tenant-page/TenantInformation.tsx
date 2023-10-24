@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useState } from 'react';
 import RemoveTenantModal from './RemoveTenantModal';
+const CustomToast = dynamic(() => import('@/components/toast/CustomToast'));
 const EditTenantModal = dynamic(() => import('./EditTenantModal'));
 
 interface TenantInformationProps {
@@ -104,6 +105,8 @@ const TenantInformation = ({ tenantId }: TenantInformationProps) => {
           setOpen={setOpenRemoveModal}
         />
       )}
+
+      <CustomToast />
     </>
   );
 };

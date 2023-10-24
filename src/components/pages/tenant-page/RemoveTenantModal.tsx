@@ -1,5 +1,6 @@
 'use client';
 import ModalWrapper from '@/components/modal/ModalWrapper';
+import { errorToast } from '@/components/toast/CustomToast';
 import { Button } from '@/components/ui/button';
 import { useDeleteTenant } from '@/hooks/use-delete-tenant';
 import { useRouter } from 'next/navigation';
@@ -23,9 +24,10 @@ const RemoveTenantModal = ({
       await deleteTenantMutation.mutateAsync({ tenantId });
 
       setOpen(false);
-      router.push('/dashboard');
+      return router.push('/dashboard');
     } catch (error) {
-      console.log(error);
+      errorToast('Fail to Remove');
+      return setOpen(false);
     }
   };
 

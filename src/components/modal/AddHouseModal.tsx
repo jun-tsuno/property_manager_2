@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { AddIcon, AlertIcon } from '../icons';
+import { successToast } from '../toast/CustomToast';
 import ModalWrapper from './ModalWrapper';
 
 const formSchema = z.object({
@@ -33,6 +34,7 @@ const AddHouseModal = () => {
       });
 
       form.reset();
+      successToast('Successfully Added House');
     } catch (error) {
       setError('Fail to create a house');
     }

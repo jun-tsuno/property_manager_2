@@ -3,6 +3,7 @@ import DatePicker from '@/components/custom-date-picker/DatePicker';
 import CustomForm from '@/components/custom-form/CustomForm';
 import CustomInput from '@/components/custom-input/CustomInput';
 import ModalWrapper from '@/components/modal/ModalWrapper';
+import { errorToast, successToast } from '@/components/toast/CustomToast';
 import { Button } from '@/components/ui/button';
 import { useUpdateTenant } from '@/hooks/use-update-tenant';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -60,15 +61,19 @@ const EditTenantModal = ({ tenant, setOpen }: EditTenantModalProps) => {
       });
 
       form.reset();
+      successToast('Successfully Updated');
       return setOpen(false);
     } catch (error) {
-      console.log(error);
+      errorToast('Fail to Update');
       return setOpen(false);
     }
   };
 
   return (
-    <ModalWrapper setOpen={setOpen} className='h-fit w-[90%] max-w-[700px]'>
+    <ModalWrapper
+      setOpen={setOpen}
+      className='h-fit max-h-[90vh] w-[90%] max-w-[700px] overflow-y-scroll'
+    >
       <CustomForm
         form={form}
         formSchema={formSchema}
