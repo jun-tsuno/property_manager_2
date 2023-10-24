@@ -1,19 +1,18 @@
-import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { getServerSession } from 'next-auth/next';
+import { checkAuthentication } from '@/utils/check-auth';
 
 export async function GET(
   req: Request,
   { params }: { params: { house_id: string } },
 ) {
-  const session = await getServerSession(authOptions);
+  const isAuthenticated = await checkAuthentication();
   const houseId = params.house_id;
 
-  try {
-    if (!session) {
-      throw new Error('Not Authorized');
-    }
+  if (!isAuthenticated) {
+    throw new Error('Not Authorized');
+  }
 
+  try {
     const house = await prisma.house.findUnique({
       where: { id: houseId },
       include: {
@@ -34,6 +33,33 @@ export async function GET(
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.log(error);
+      return Response.json(error, {
+        status: 500,
+        statusText: error.message,
+      });
+    }
+  }
+}
+
+export async function DELETE(
+  req: Request,
+  { params }: { params: { house_id: string } },
+) {
+  const isAuthenticated = await checkAuthentication();
+  const houseId = params.house_id;
+
+  if (!isAuthenticated) {
+    throw new Error('Not Authorized');
+  }
+
+  try {
+    const house = await prisma.house.delete({
+      where: { id: houseId },
+    });
+
+    return Response.json(house);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
       return Response.json(error, {
         status: 500,
         statusText: error.message,

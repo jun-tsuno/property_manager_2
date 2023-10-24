@@ -1,6 +1,6 @@
 'use client';
-import CustomForm from '@/components/custom-form/custom-form';
-import CustomInput from '@/components/custom-input/custom-input';
+import CustomForm from '@/components/custom-form/CustomForm';
+import CustomInput from '@/components/custom-input/CustomInput';
 import { Button } from '@/components/ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';

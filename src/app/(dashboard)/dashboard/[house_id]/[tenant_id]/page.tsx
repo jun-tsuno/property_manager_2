@@ -1,4 +1,4 @@
-import BackButton from '@/components/back-button/back-button';
+import BackButton from '@/components/back-button/BackButton';
 import TenantInformation from '@/components/pages/tenant-page/TenantInformation';
 
 export const metadata = {
@@ -10,9 +10,10 @@ const TenantPage = async ({ params }: { params: { tenant_id: string } }) => {
 
   return (
     <>
-      <BackButton href='/dashboard' label='Home' className='mb-3 pt-6' />
-      <h2 className='mb-10'>Tenant Information</h2>
-      <TenantInformation tenantId={tenant_id} />
+      <div className='pb-10 pt-6'>
+        <BackButton href='/dashboard' label='Home' className='mb-6' />
+        <TenantInformation tenantId={tenant_id} />
+      </div>
     </>
   );
 };

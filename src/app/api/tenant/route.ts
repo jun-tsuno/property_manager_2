@@ -1,6 +1,5 @@
 import { prisma } from '@/lib/prisma';
 import { checkAuthentication } from '@/utils/check-auth';
-import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
   const isAuthenticated = await checkAuthentication();
@@ -20,6 +19,15 @@ export async function GET(req: Request) {
   try {
     const tenant = await prisma.tenant.findUnique({
       where: { id: tenantId },
+      include: {
+        house: {
+          select: {
+            id: true,
+            houseName: true,
+            location: true,
+          },
+        },
+      },
     });
 
     return Response.json(tenant);
@@ -68,27 +76,80 @@ export async function POST(req: Request) {
   }
 }
 
-export async function DELETE(req: Request) {
+export async function PATCH(req: Request) {
+  const isAuthenticated = await checkAuthentication();
+  const { searchParams } = new URL(req.url);
+  const tenantId = searchParams.get('id');
+
+  const { name, email, roomId, phone, fee, startDate, endDate, houseId } =
+    await req.json();
+
+  if (!isAuthenticated) {
+    throw new Error('Not Authorized');
+  }
+
+  if (!tenantId)
+    return Response.json('Tenant id is not defined', {
+      status: 400,
+      statusText: 'Bad Request',
+    });
+
   try {
-    const { searchParams } = new URL(req.url);
-    const tenantId = searchParams.get('id');
+    const tenant = await prisma.tenant.update({
+      where: {
+        id: tenantId,
+      },
+      data: {
+        name,
+        email,
+        roomId,
+        phone,
+        fee,
+        startDate,
+        endDate,
+        houseId,
+      },
+    });
 
-    if (!tenantId) return NextResponse.json({ message: 'No such tenant' });
+    return Response.json(tenant);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log(error);
+      return Response.json(error, {
+        status: 500,
+        statusText: error.message,
+      });
+    }
+  }
+}
 
-    await prisma.tenant.delete({
+export async function DELETE(req: Request) {
+  const isAuthenticated = await checkAuthentication();
+  const { searchParams } = new URL(req.url);
+  const tenantId = searchParams.get('id');
+
+  if (!isAuthenticated) {
+    throw new Error('Not Authorized');
+  }
+
+  if (!tenantId)
+    return Response.json('Tenant id is not defined', {
+      status: 400,
+      statusText: 'Bad Request',
+    });
+
+  try {
+    const tenant = await prisma.tenant.delete({
       where: { id: tenantId },
     });
 
-    return NextResponse.json({ message: 'Successfully deleted' });
+    return Response.json(tenant);
   } catch (error: unknown) {
     if (error instanceof Error) {
-      return new NextResponse(
-        JSON.stringify({
-          status: 'error',
-          message: error.message,
-        }),
-        { status: 500 },
-      );
+      return Response.json(error, {
+        status: 500,
+        statusText: error.message,
+      });
     }
   }
 }

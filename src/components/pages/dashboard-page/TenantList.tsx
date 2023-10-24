@@ -1,6 +1,6 @@
 import { ChevronIcon } from '@/components/icons';
 import TenantTable from '@/components/table/TenantTable';
-import { dateFormat } from '@/utils/dateFormat';
+import { dateFormat } from '@/utils/date-formatter';
 import { Tenant } from '@prisma/client';
 import Link from 'next/link';
 

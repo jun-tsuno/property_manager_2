@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { dateFormat } from '@/utils/dateFormat';
+import { dateFormat } from '@/utils/date-formatter';
 import { Tenant } from '@prisma/client';
 import Link from 'next/link';
 import { Fragment } from 'react';

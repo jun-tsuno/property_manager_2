@@ -1,6 +1,6 @@
 'use client';
-import CustomForm from '@/components/custom-form/custom-form';
-import CustomInput from '@/components/custom-input/custom-input';
+import CustomForm from '@/components/custom-form/CustomForm';
+import CustomInput from '@/components/custom-input/CustomInput';
 import { Button } from '@/components/ui/button';
 import { useAddHouse } from '@/hooks/use-add-house';
 import { zodResolver } from '@hookform/resolvers/zod';

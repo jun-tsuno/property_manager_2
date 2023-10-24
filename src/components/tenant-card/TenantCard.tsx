@@ -1,5 +1,5 @@
 import { TenantWithPayment } from '@/types/types';
-import { dateFormat } from '@/utils/dateFormat';
+import { dateFormat } from '@/utils/date-formatter';
 import { format } from 'date-fns';
 import CalenderIcon from '../../../public/svgIcon/calender';
 import DollarIcon from '../../../public/svgIcon/dollar';

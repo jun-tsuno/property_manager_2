@@ -1,7 +1,7 @@
 'use client';
 import DatePicker from '@/components/custom-date-picker/DatePicker';
-import CustomForm from '@/components/custom-form/custom-form';
-import CustomInput from '@/components/custom-input/custom-input';
+import CustomForm from '@/components/custom-form/CustomForm';
+import CustomInput from '@/components/custom-input/CustomInput';
 import { Button } from '@/components/ui/button';
 import { useAddTenant } from '@/hooks/use-add-tenant';
 import { useFetchHouse } from '@/hooks/use-fetch-house';

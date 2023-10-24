@@ -1,6 +1,6 @@
 'use client';
-import CustomForm from '@/components/custom-form/custom-form';
-import FormInput from '@/components/custom-input/custom-input';
+import CustomForm from '@/components/custom-form/CustomForm';
+import FormInput from '@/components/custom-input/CustomInput';
 import { Button } from '@/components/ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
@@ -31,10 +31,13 @@ const RegisterForms = () => {
       return setPassErr('Password Unmatched');
 
     try {
-      await axios.post('/api/register', { ...values });
+      const res = await axios.post('/api/register', { ...values });
+      const user = res.data();
 
-      setPassErr('');
-      signIn(undefined, { callbackUrl: '/' });
+      if (user) {
+        setPassErr('');
+        signIn(undefined, { callbackUrl: '/' });
+      }
     } catch (error) {
       console.log(error);
       setPassErr('Fail to register user.');

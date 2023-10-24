@@ -1,5 +1,5 @@
-import BackButton from '@/components/back-button/back-button';
-import AddTenantForm from '@/components/form/add-tenant-form';
+import BackButton from '@/components/back-button/BackButton';
+import AddTenantForm from '@/components/form/AddTenantForm';
 import PeoplePicture from '../../../../../../public/svgIcon/people';
 
 export const metadata = {

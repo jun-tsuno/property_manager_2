@@ -1,6 +1,6 @@
 'use client';
-import CustomForm from '@/components/custom-form/custom-form';
-import CustomInput from '@/components/custom-input/custom-input';
+import CustomForm from '@/components/custom-form/CustomForm';
+import CustomInput from '@/components/custom-input/CustomInput';
 import AddHouseDialog from '@/components/dialog/add-house';
 import { Button } from '@/components/ui/button';
 import { nextAPI } from '@/lib/axios';

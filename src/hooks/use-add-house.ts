@@ -1,4 +1,5 @@
 import { nextAPI } from '@/lib/axios';
+import { House } from '@prisma/client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 type Args = {
@@ -6,7 +7,7 @@ type Args = {
   location: string;
 };
 
-const addHouse = async ({ houseName, location }: Args) => {
+const addHouse = async ({ houseName, location }: Args): Promise<House> => {
   const res = await nextAPI.post('/house', {
     houseName,
     location,
