@@ -35,7 +35,7 @@ const RemoveTenantModal = ({
     <>
       <ModalWrapper setOpen={setOpen} className='h-fit w-[90%] max-w-[700px]'>
         <>
-          <h3 className='mb-6'>Are you sure to remove?</h3>
+          <h3 className='mb-6 font-bold'>Are you sure to remove?</h3>
           <p className='mb-6'>
             The tenant information will be permanently deleted.
           </p>
@@ -48,7 +48,12 @@ const RemoveTenantModal = ({
             >
               Cancel
             </Button>
-            <Button type='submit' className='w-full' onClick={handleRemove}>
+            <Button
+              type='submit'
+              variant='destructive'
+              className='w-full'
+              onClick={handleRemove}
+            >
               Remove
             </Button>
           </div>

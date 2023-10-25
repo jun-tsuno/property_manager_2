@@ -23,7 +23,10 @@ const TenantListSection = ({ selectedHouse }: TenantListProps) => {
   return (
     <>
       <section>
-        <h3 className='flex items-center justify-center gap-2 font-bold'>
+        <Link href={`/dashboard/add-tenant/${houseId}`} className='block w-fit'>
+          <Button>Add Tenant</Button>
+        </Link>
+        <h3 className='mt-2 flex items-center justify-center gap-2 font-bold'>
           <HouseIcon className='h-6 w-6' />
           {house?.houseName}
         </h3>
@@ -37,13 +40,6 @@ const TenantListSection = ({ selectedHouse }: TenantListProps) => {
             <p className='font-bold text-slate-400'>No tenants</p>
           </div>
         )}
-
-        <Link
-          href={`/dashboard/add-tenant/${houseId}`}
-          className='mx-auto block w-fit'
-        >
-          <Button>Add Tenant</Button>
-        </Link>
       </section>
     </>
   );

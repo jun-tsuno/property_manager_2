@@ -1,58 +1,70 @@
-import DeleteHouseDialog from '@/components/dialog/delete-house';
-import Layout from '@/components/layout/layout';
-import { Button } from '@/components/ui/button';
-import { nextAPI } from '@/lib/axios';
-import Link from 'next/link';
-import LocationIcon from '../../../../../public/svgIcon/location';
+import BackButton from '@/components/back-button/BackButton';
+import { HouseIllustration } from '@/components/icons';
+import ListItem from '@/components/pages/house-page/ListItem';
+import { prisma } from '@/lib/prisma';
+import { Metadata, ResolvingMetadata } from 'next';
+import { cache } from 'react';
 
-interface TenantInfo {
-  id: string;
-  name: string;
-  roomId: number;
-  fee: number;
-  endDate: Date;
+const fetchHouse = cache(async (houseId: string) => {
+  try {
+    const house = await prisma.house.findUnique({
+      where: { id: houseId },
+      include: {
+        tenant: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+
+    return house;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+});
+
+export async function generateMetadata(
+  { params }: { params: { house_id: string } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const houseId = params.house_id;
+
+  try {
+    const house = await fetchHouse(houseId);
+
+    return { title: house?.houseName };
+  } catch (error) {
+    return { title: 'House Detail' };
+  }
 }
 
-const HouseDetail = async ({ params }: { params: { houseId: string } }) => {
-  const houseId = params.houseId;
-
-  const res = await nextAPI.get(`/house-detail?id=${houseId}`);
-  const houseDetail = res.data.houseDetail;
+const HousePage = async ({ params }: { params: { house_id: string } }) => {
+  const houseId = params.house_id;
+  const house = await fetchHouse(houseId);
+  const tenantsCount = house?.tenant.length;
 
   return (
     <>
-      <Layout>
-        <div className='flex items-center py-5 pl-3'>
-          {/* <BackButton to='/dashboard' /> */}
-          <h2 className='px-10'>House Detail</h2>
-        </div>
-        <div className='mx-auto max-w-[800px]'>
-          <div className='bg-light-gray rounded-sm p-3 drop-shadow-md'>
-            <h3 className='text-center'>{houseDetail?.houseName}</h3>
-            <p className='flex items-center justify-center pt-1 text-sm'>
-              <LocationIcon />
-              <span className='pl-2'>{houseDetail?.location}</span>
-            </p>
-          </div>
-          <div className='py-10'>
-            {/* <CustomTable
-              tenants={houseDetail?.tenant as TenantInfo[]}
-              houseId={houseId}
-            /> */}
-          </div>
+      <section className='mb:mb-[120px] pb-8 pt-6'>
+        <BackButton label='Home' href='/dashboard' className='mb-2' />
+        <h2 className='mb-8 lg:mb-16'>House Detail</h2>
 
-          <div className='flex justify-center gap-3 pt-7 sm:gap-10'>
-            <Link href={`/dashboard/${houseId}/add-tenant`}>
-              <Button className='bg-green text-black hover:bg-green hover:brightness-110'>
-                Add Tenant
-              </Button>
-            </Link>
-            <DeleteHouseDialog houseId={houseId} />
-          </div>
+        <div className='flex flex-col gap-4 md:flex-row md:items-center md:gap-10'>
+          <HouseIllustration className='mx-auto aspect-square w-[180px] rounded-full border border-slate-300 md:w-[220px]' />
+          <ul className='md:min-w-[300px] md:max-w-[600px] md:grow'>
+            <ListItem label='House Name' value={house?.houseName} />
+            <ListItem label='Location' value={house?.location} />
+            <ListItem
+              label='Current Tenants'
+              value={tenantsCount?.toString()}
+            />
+          </ul>
         </div>
-      </Layout>
+      </section>
     </>
   );
 };
 
-export default HouseDetail;
+export default HousePage;

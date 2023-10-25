@@ -1,7 +1,8 @@
 'use client';
 import HouseCard from '@/components/house-card/HouseCard';
-import { ManWithHouse } from '@/components/icons';
+import { ChevronIcon, ManWithHouse } from '@/components/icons';
 import { House } from '@prisma/client';
+import Link from 'next/link';
 
 interface HouseListProps {
   houses: House[];
@@ -14,11 +15,23 @@ const HouseList = ({
   selectedHouse,
   handleSelectHouse,
 }: HouseListProps) => {
+  const toHouseDetailPage = `/dashboard/${selectedHouse}`;
+
   return (
     <>
+      {selectedHouse && (
+        <Link
+          href={toHouseDetailPage}
+          className='mb-2 ml-auto flex w-fit flex-row-reverse items-center gap-1 hover:underline'
+        >
+          <ChevronIcon className='h-5 w-5 rotate-180' />
+          See detail
+        </Link>
+      )}
+
       <div className='grow'>
         {houses.length > 0 ? (
-          <div className='flex max-w-[1060px] gap-6 overflow-x-scroll px-4 pb-8 pt-6'>
+          <div className='flex max-w-[1060px] gap-6 overflow-x-scroll px-4 pb-8 pt-3'>
             {houses.map((house) => (
               <HouseCard
                 key={house.id}

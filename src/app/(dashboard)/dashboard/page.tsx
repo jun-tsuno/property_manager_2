@@ -7,7 +7,7 @@ export const metadata = {
 const DashboardPage = async () => {
   return (
     <>
-      <div className='mb-8 md:mb-16'>
+      <div className='pb-8 md:pb-[120px]'>
         <HouseInformation />
       </div>
     </>

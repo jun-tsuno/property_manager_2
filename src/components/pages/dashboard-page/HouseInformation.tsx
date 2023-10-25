@@ -36,8 +36,8 @@ const HouseInformation = () => {
 
   return (
     <>
-      <section>
-        <h2 className='flex items-center gap-4 py-5'>
+      <section className='mb-10'>
+        <h2 className='flex flex-col gap-2 pt-6'>
           <span>Your House List</span>
           <AddHouseModal />
         </h2>
@@ -49,7 +49,7 @@ const HouseInformation = () => {
       </section>
 
       <section>
-        <h2 className='flex items-center gap-4 py-5'>Tenant List</h2>
+        <h2 className='flex items-center gap-4 pb-2'>Tenant List</h2>
         {selectedHouse ? (
           <TenantListSection selectedHouse={selectedHouse} />
         ) : (

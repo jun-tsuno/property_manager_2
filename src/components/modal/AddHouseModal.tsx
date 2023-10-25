@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { AddIcon, AlertIcon } from '../icons';
+import { AlertIcon } from '../icons';
 import { successToast } from '../toast/CustomToast';
 import ModalWrapper from './ModalWrapper';
 
@@ -42,9 +42,9 @@ const AddHouseModal = () => {
 
   return (
     <>
-      <button onClick={() => setOpenModal(true)}>
-        <AddIcon className='h-8 w-8 hover:scale-110 hover:brightness-95' />
-      </button>
+      <Button onClick={() => setOpenModal(true)} className='w-fit'>
+        Add House
+      </Button>
 
       {openModal && (
         <ModalWrapper setOpen={setOpenModal}>
