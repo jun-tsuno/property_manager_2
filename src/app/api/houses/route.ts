@@ -15,6 +15,9 @@ export async function GET(req: Request) {
       where: {
         ownerId,
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
 
     return Response.json(houses);

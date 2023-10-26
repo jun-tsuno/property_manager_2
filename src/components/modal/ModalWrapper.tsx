@@ -26,7 +26,7 @@ const ModalWrapper = ({ children, className, setOpen }: ModalWrapperProps) => {
         {children}
       </div>
 
-      <div className='fixed left-0 top-0 z-[100] h-[100vh] w-[100vw] bg-black/20' />
+      <div className='fixed left-0 top-0 z-[100] h-[100vh] w-[100vw] bg-[#303e5e]/60' />
     </>
   );
 };

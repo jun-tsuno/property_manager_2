@@ -17,6 +17,9 @@ export async function GET(
       where: { id: houseId },
       include: {
         tenant: {
+          orderBy: {
+            createdAt: 'asc',
+          },
           select: {
             id: true,
             name: true,
@@ -33,6 +36,38 @@ export async function GET(
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.log(error);
+      return Response.json(error, {
+        status: 500,
+        statusText: error.message,
+      });
+    }
+  }
+}
+
+export async function PATCH(
+  req: Request,
+  { params }: { params: { house_id: string } },
+) {
+  const isAuthenticated = await checkAuthentication();
+  const houseId = params.house_id;
+  const { houseName, location } = await req.json();
+
+  if (!isAuthenticated) {
+    throw new Error('Not Authorized');
+  }
+
+  try {
+    const house = await prisma.house.update({
+      where: { id: houseId },
+      data: {
+        houseName,
+        location,
+      },
+    });
+
+    return Response.json(house);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
       return Response.json(error, {
         status: 500,
         statusText: error.message,
