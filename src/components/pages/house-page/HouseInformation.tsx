@@ -2,8 +2,9 @@
 import { HouseIllustration } from '@/components/icons';
 import EditHouseModal from '@/components/pages/house-page/EditHouseModal';
 import ListItem from '@/components/pages/house-page/ListItem';
-import CustomToast from '@/components/toast/CustomToast';
 import { useFetchHouse } from '@/hooks/use-fetch-house';
+import Image from 'next/image';
+import Link from 'next/link';
 import DeleteHouseModal from './DeleteHouseModal';
 
 interface HouseInformationProps {
@@ -12,16 +13,44 @@ interface HouseInformationProps {
 
 const HouseInformation = ({ houseId }: HouseInformationProps) => {
   const { data: house } = useFetchHouse(houseId);
-  const tenantsCount = house?.tenant.length;
+
+  const tenants = house?.tenant;
 
   return (
     <>
       <div className='flex flex-col gap-4 md:flex-row md:items-center md:gap-10'>
         <HouseIllustration className='mx-auto aspect-square w-[180px] rounded-full border border-slate-300 md:w-[220px]' />
+
         <ul className='md:min-w-[300px] md:max-w-[600px] md:grow'>
-          <ListItem label='House Name' value={house?.houseName} />
-          <ListItem label='Location' value={house?.location} />
-          <ListItem label='Current Tenants' value={tenantsCount?.toString()} />
+          <ListItem label='House Name'>
+            <span>{house?.houseName}</span>
+          </ListItem>
+          <ListItem label='Location'>
+            <span>{house?.location}</span>
+          </ListItem>
+          <ListItem label='Current Tenants'>
+            <ul className='flex flex-col gap-3'>
+              {tenants &&
+                tenants.map((tenant) => (
+                  <li key={tenant.id} className='flex items-center gap-2'>
+                    <Image
+                      src='/image/avatar-man.jpg'
+                      alt={tenant.name}
+                      width={0}
+                      height={0}
+                      sizes='100vw'
+                      className='aspect-square w-8 rounded-full object-cover'
+                    />
+                    <Link
+                      href={`/dashboard/${houseId}/${tenant.id}`}
+                      className='rounded-lg bg-slate-100 px-2 py-1 text-slate-600 hover:brightness-95'
+                    >
+                      {tenant.name}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </ListItem>
         </ul>
       </div>
 
@@ -31,8 +60,6 @@ const HouseInformation = ({ houseId }: HouseInformationProps) => {
           <DeleteHouseModal houseId={house.id} />
         </div>
       )}
-
-      <CustomToast />
     </>
   );
 };

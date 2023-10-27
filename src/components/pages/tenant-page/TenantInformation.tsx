@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { useFetchTenant } from '@/hooks/use-fetch-tenant';
 import { dateFormat } from '@/utils/date-formatter';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import { useState } from 'react';
+import AvatarSelectModal from './AvatarSelectModal';
 import RemoveTenantModal from './RemoveTenantModal';
 const CustomToast = dynamic(() => import('@/components/toast/CustomToast'));
 const EditTenantModal = dynamic(() => import('./EditTenantModal'));
@@ -46,24 +46,21 @@ const TenantInformation = ({ tenantId }: TenantInformationProps) => {
 
   const startDate = dateFormat(tenant?.startDate);
   const endDate = dateFormat(tenant?.endDate);
+  const updatedAt = dateFormat(tenant?.updatedAt);
 
   return (
     <>
-      <div className='mb-10 flex items-center gap-2'>
+      <div className='mb-4 flex items-center gap-2'>
         <HouseIcon className='h-6 w-6' />
         <h2>{tenant?.house?.houseName || '-'}</h2>
       </div>
+      <p className='mb-4 text-end text-xs lg:mb-8'>
+        Lastly Updated: {updatedAt}
+      </p>
 
       <div className='flex flex-col gap-3 lg:flex-row lg:gap-10'>
-        <Image
-          src='/image/avatar-man.jpg'
-          alt={tenant?.name}
-          width={0}
-          height={0}
-          sizes='100vw'
-          priority
-          className='mx-auto h-[120px] w-[120px] rounded-full object-cover object-center lg:h-[160px] lg:w-[160px]'
-        />
+        <AvatarSelectModal />
+
         <div className='lg:max-w-[700px] lg:grow'>
           <ul className='mb-8 grid sm:grid-cols-2 md:mb-16'>
             <ListItem label='Name' value={tenant?.name} />

@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { HouseIcon } from '../icons';
+import CustomToast, { successToast } from '../toast/CustomToast';
 
 interface AddTenantFormProps {
   houseId: string;
@@ -58,6 +59,7 @@ const AddTenantForm = ({ houseId }: AddTenantFormProps) => {
       });
 
       form.reset();
+      successToast('Successfully Added');
     } catch (error) {
       setError('Fail to add a tenant');
     }
@@ -124,8 +126,8 @@ const AddTenantForm = ({ houseId }: AddTenantFormProps) => {
           <DatePicker form={form} name='endDate' label='End Date' />
         </div>
 
-        <div className='text-center'>
-          <Button type='submit'>
+        <div className='text-center sm:pt-8'>
+          <Button type='submit' className='w-full sm:max-w-[500px]'>
             {!loading ? 'Submit' : 'Please Wait ...'}
           </Button>
           {error && (
@@ -135,6 +137,8 @@ const AddTenantForm = ({ houseId }: AddTenantFormProps) => {
           )}
         </div>
       </CustomForm>
+
+      <CustomToast />
     </>
   );
 };

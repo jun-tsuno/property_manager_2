@@ -38,7 +38,7 @@ const DatePicker = (props: DatePickerProps) => {
         control={form.control}
         name={name}
         render={({ field }) => (
-          <FormItem className='flex flex-col'>
+          <FormItem className='flex w-full flex-col'>
             <FormLabel className='flex items-center'>
               {label} <i className='px-2'>{withFlag && <WarnIcon />}</i>
             </FormLabel>
@@ -67,6 +67,7 @@ const DatePicker = (props: DatePickerProps) => {
                   selected={field.value}
                   onSelect={field.onChange}
                   initialFocus
+                  disabled={name === 'endDate' ? { before: new Date() } : false}
                 />
               </PopoverContent>
             </Popover>

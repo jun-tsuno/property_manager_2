@@ -2,6 +2,7 @@
 import FetchError from '@/components/error/FetchError';
 import { HouseIcon } from '@/components/icons';
 import Loading from '@/components/loading/Loading';
+import CustomToast from '@/components/toast/CustomToast';
 import { Button } from '@/components/ui/button';
 import { useFetchHouse } from '@/hooks/use-fetch-house';
 import Link from 'next/link';
@@ -40,6 +41,8 @@ const TenantListSection = ({ selectedHouse }: TenantListProps) => {
             <p className='font-bold text-slate-400'>No tenants</p>
           </div>
         )}
+
+        <CustomToast />
       </section>
     </>
   );
