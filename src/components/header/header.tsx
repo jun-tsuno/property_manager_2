@@ -11,14 +11,14 @@ const Header = () => {
 
   return (
     <>
-      <div className='flex items-center justify-between bg-white px-4 py-2 shadow-md'>
+      <div className='fixed top-0 z-50 flex h-[60px] w-full items-center justify-between bg-white px-4 py-2 shadow-md'>
         <Link href='/' className='font-lobster text-xl'>
           Rent
         </Link>
         <div className='flex items-center'>
           <Link
             href='/dashboard'
-            className='rounded-full p-2 hover:bg-light-gray hover:drop-shadow-xl'
+            className='hover:bg-light-gray rounded-full p-2 hover:drop-shadow-xl'
           >
             <DashboardIcon />
           </Link>

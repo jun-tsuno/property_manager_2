@@ -1,12 +1,17 @@
-export { default } from 'next-auth/middleware';
+import { withAuth } from 'next-auth/middleware';
+
+export default withAuth(function middleware(req) {}, {
+  callbacks: {
+    authorized: ({ token }) => {
+      if (!token) {
+        return false;
+      }
+
+      return true;
+    },
+  },
+});
 
 export const config = {
-  runtime: 'experimental-edge', // for Edge API Routes only
-  unstable_allowDynamic: [
-    // allows a single file
-    '/lib/utilities.js',
-    // use a glob to allow anything in the function-bind 3rd party module
-    '/node_modules/function-bind/**',
-  ],
   matcher: '/dashboard/:path*',
 };

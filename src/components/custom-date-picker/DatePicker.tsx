@@ -14,7 +14,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/shadcn-ui';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { UseFormReturn } from 'react-hook-form';
@@ -26,6 +26,7 @@ interface DatePickerProps {
   form: UseFormReturn<any>;
   description?: string;
   withFlag?: boolean;
+  className?: string;
 }
 
 const DatePicker = (props: DatePickerProps) => {
@@ -37,7 +38,7 @@ const DatePicker = (props: DatePickerProps) => {
         control={form.control}
         name={name}
         render={({ field }) => (
-          <FormItem className='flex flex-col'>
+          <FormItem className='flex w-full flex-col'>
             <FormLabel className='flex items-center'>
               {label} <i className='px-2'>{withFlag && <WarnIcon />}</i>
             </FormLabel>
@@ -47,7 +48,7 @@ const DatePicker = (props: DatePickerProps) => {
                   <Button
                     variant={'outline'}
                     className={cn(
-                      'w-[240px] pl-3 text-left font-normal',
+                      'w-full pl-3 text-left font-normal',
                       !field.value && 'text-muted-foreground',
                     )}
                   >
@@ -60,12 +61,13 @@ const DatePicker = (props: DatePickerProps) => {
                   </Button>
                 </FormControl>
               </PopoverTrigger>
-              <PopoverContent className='w-auto p-0' align='start'>
+              <PopoverContent className='z-[200] w-auto p-0' align='start'>
                 <Calendar
                   mode='single'
                   selected={field.value}
                   onSelect={field.onChange}
                   initialFocus
+                  disabled={name === 'endDate' ? { before: new Date() } : false}
                 />
               </PopoverContent>
             </Popover>
