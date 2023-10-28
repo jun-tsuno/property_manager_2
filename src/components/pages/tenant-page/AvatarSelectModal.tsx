@@ -1,22 +1,45 @@
 'use client';
 import { ChangeAvatarIcon } from '@/components/icons';
+import { errorToast, successToast } from '@/components/toast/CustomToast';
 import useClickOutside from '@/hooks/use-click-outside';
+import { useUpdateTenant } from '@/hooks/use-update-tenant';
 import { AVATARS } from '@/utils/constants';
+import { Tenant } from '@prisma/client';
 import Image from 'next/image';
 
-const AvatarSelectModal = () => {
-  const { wrapperRef, open, setOpen } = useClickOutside();
+interface AvatarSelectModal {
+  tenant: Tenant;
+}
 
-  const handleClick = () => {
+const AvatarSelectModal = ({ tenant }: AvatarSelectModal) => {
+  const { wrapperRef, open, setOpen } = useClickOutside();
+  const updateTenantMutation = useUpdateTenant(tenant?.id, tenant?.houseId);
+
+  const handleSelect = async (path: string) => {
+    if (path === tenant.avatar) {
+      return setOpen(false);
+    }
+
+    try {
+      await updateTenantMutation.mutateAsync({
+        avatar: path,
+        tenantId: tenant.id,
+      });
+
+      successToast('Successfully updated');
+    } catch (error) {
+      errorToast('Fail to update');
+    }
+
     setOpen(false);
   };
 
   return (
     <>
-      <div ref={wrapperRef} className='relative mx-auto'>
+      <div ref={wrapperRef} className='relative mx-auto h-fit'>
         <button onClick={() => setOpen(!open)} className='relative'>
           <Image
-            src='/image/avatar-man.jpg'
+            src={tenant?.avatar || '/image/avatar-cat.jpg'}
             alt='man-image'
             width={0}
             height={0}
@@ -35,7 +58,7 @@ const AvatarSelectModal = () => {
               {AVATARS.map((avatar) => (
                 <button
                   key={avatar.alt}
-                  onClick={handleClick}
+                  onClick={() => handleSelect(avatar.path)}
                   className='hover:scale-105 hover:brightness-95'
                 >
                   <Image

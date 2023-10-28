@@ -34,12 +34,12 @@ const HouseInformation = ({ houseId }: HouseInformationProps) => {
                 tenants.map((tenant) => (
                   <li key={tenant.id} className='flex items-center gap-2'>
                     <Image
-                      src='/image/avatar-man.jpg'
+                      src={tenant.avatar || '/image/avatar-cat.jpg'}
                       alt={tenant.name}
                       width={0}
                       height={0}
                       sizes='100vw'
-                      className='aspect-square w-8 rounded-full object-cover'
+                      className='aspect-square w-8 rounded-full object-cover md:w-12'
                     />
                     <Link
                       href={`/dashboard/${houseId}/${tenant.id}`}

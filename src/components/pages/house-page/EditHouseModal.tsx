@@ -56,7 +56,7 @@ const EditHouseModal = ({ house }: EditHouseModalProps) => {
       </Button>
 
       {openModal && (
-        <ModalWrapper setOpen={setOpenModal}>
+        <ModalWrapper setOpen={setOpenModal} className='max-w-[500px]'>
           <>
             <h2 className='mb-6 font-semibold'>Edit House</h2>
             <CustomForm

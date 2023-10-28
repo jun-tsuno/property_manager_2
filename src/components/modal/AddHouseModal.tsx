@@ -47,9 +47,9 @@ const AddHouseModal = () => {
       </Button>
 
       {openModal && (
-        <ModalWrapper setOpen={setOpenModal}>
+        <ModalWrapper setOpen={setOpenModal} className='max-w-[500px]'>
           <>
-            <h2 className='mb-6'>Add House</h2>
+            <h2 className='mb-6 font-bold'>Add House</h2>
             <CustomForm
               form={form}
               formSchema={formSchema}

@@ -2,13 +2,14 @@ import { nextAPI } from '@/lib/axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 type Args = {
-  name: string;
-  email: string;
+  name?: string;
+  email?: string;
   roomId?: number;
   phone?: string;
-  fee: number;
-  startDate: Date;
+  fee?: number;
+  startDate?: Date;
   endDate?: Date;
+  avatar?: string;
   tenantId: string;
 };
 
@@ -20,6 +21,7 @@ const updateTenant = async ({
   fee,
   startDate,
   endDate,
+  avatar,
   tenantId,
 }: Args) => {
   const res = await nextAPI.patch(`/tenant?id=${tenantId}`, {
@@ -30,6 +32,7 @@ const updateTenant = async ({
     fee,
     startDate,
     endDate,
+    avatar,
   });
 
   return res.data;

@@ -40,6 +40,7 @@ model Tenant {
   fee         Int
   startDate   DateTime
   endDate     DateTime?
+  avatar      String?
   house       House @relation(fields: [houseId], references: [id], onDelete: Cascade)
   houseId     String
   createdAt DateTime @default(now())

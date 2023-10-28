@@ -29,7 +29,7 @@ const TenantListSection = ({ selectedHouse }: TenantListProps) => {
         </Link>
         <h3 className='mt-2 flex items-center justify-center gap-2 font-bold'>
           <HouseIcon className='h-6 w-6' />
-          {house?.houseName}
+          {house?.houseName || '-'}
         </h3>
 
         {tenants && tenants?.length > 0 ? (
@@ -38,7 +38,7 @@ const TenantListSection = ({ selectedHouse }: TenantListProps) => {
           </div>
         ) : (
           <div className='py-10 text-center'>
-            <p className='font-bold text-slate-400'>No tenants</p>
+            <p className='text-sm text-slate-400'>No tenants</p>
           </div>
         )}
 

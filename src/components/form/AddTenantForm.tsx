@@ -5,6 +5,7 @@ import CustomInput from '@/components/custom-input/CustomInput';
 import { Button } from '@/components/ui/button';
 import { useAddTenant } from '@/hooks/use-add-tenant';
 import { useFetchHouse } from '@/hooks/use-fetch-house';
+import { AVATARS } from '@/utils/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -55,6 +56,7 @@ const AddTenantForm = ({ houseId }: AddTenantFormProps) => {
         fee: values.fee,
         startDate: values.startDate,
         endDate: values.endDate,
+        avatar: AVATARS[2].path,
         houseId,
       });
 

@@ -59,7 +59,7 @@ const TenantInformation = ({ tenantId }: TenantInformationProps) => {
       </p>
 
       <div className='flex flex-col gap-3 lg:flex-row lg:gap-10'>
-        <AvatarSelectModal />
+        <AvatarSelectModal tenant={tenant} />
 
         <div className='lg:max-w-[700px] lg:grow'>
           <ul className='mb-8 grid sm:grid-cols-2 md:mb-16'>

@@ -43,8 +43,17 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const isAuthenticated = await checkAuthentication();
-  const { name, email, roomId, phone, fee, startDate, endDate, houseId } =
-    await req.json();
+  const {
+    name,
+    email,
+    roomId,
+    phone,
+    fee,
+    startDate,
+    endDate,
+    avatar,
+    houseId,
+  } = await req.json();
 
   if (!isAuthenticated) {
     throw new Error('Not Authorized');
@@ -60,6 +69,7 @@ export async function POST(req: Request) {
         fee,
         startDate,
         endDate,
+        avatar,
         houseId,
       },
     });
@@ -81,8 +91,17 @@ export async function PATCH(req: Request) {
   const { searchParams } = new URL(req.url);
   const tenantId = searchParams.get('id');
 
-  const { name, email, roomId, phone, fee, startDate, endDate, houseId } =
-    await req.json();
+  const {
+    name,
+    email,
+    roomId,
+    phone,
+    fee,
+    startDate,
+    endDate,
+    avatar,
+    houseId,
+  } = await req.json();
 
   if (!isAuthenticated) {
     throw new Error('Not Authorized');
@@ -107,6 +126,7 @@ export async function PATCH(req: Request) {
         fee,
         startDate,
         endDate,
+        avatar,
         houseId,
       },
     });

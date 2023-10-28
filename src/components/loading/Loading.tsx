@@ -1,4 +1,4 @@
-import Spinner from '../spinner/spinner';
+import Spinner from '../spinner/Spinner';
 
 interface LoadingProps {
   withText?: boolean;

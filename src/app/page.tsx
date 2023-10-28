@@ -12,7 +12,7 @@ const TopPage = () => {
             alt='house'
             width={0}
             height={0}
-            sizes='100vh'
+            sizes='100vw'
             priority
             className='h-full w-full object-cover'
           />

@@ -27,6 +27,7 @@ export async function GET(
             fee: true,
             endDate: true,
             houseId: true,
+            avatar: true,
           },
         },
       },

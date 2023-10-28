@@ -9,6 +9,7 @@ type Args = {
   fee: number;
   startDate: Date;
   endDate?: Date;
+  avatar: String;
   houseId: string;
 };
 
@@ -20,6 +21,7 @@ const addTenant = async ({
   fee,
   startDate,
   endDate,
+  avatar,
   houseId,
 }: Args) => {
   const res = await nextAPI.post('/tenant', {
@@ -30,6 +32,7 @@ const addTenant = async ({
     fee,
     startDate,
     endDate,
+    avatar,
     houseId,
   });
 
