@@ -36,4 +36,4 @@ Rental housing and shared housing are very widespread in Canada. Some of those o
 ## Upcoming
 
 - Image upload
-- Unit/Integration test
+- Payment record tracker
