@@ -36,10 +36,6 @@ const LoginForms = () => {
       });
       setLoading(false);
 
-      if (!res?.ok) {
-        throw new Error('Fail to Login');
-      }
-
       router.push('/dashboard');
     } catch (error: unknown) {
       setLoading(false);

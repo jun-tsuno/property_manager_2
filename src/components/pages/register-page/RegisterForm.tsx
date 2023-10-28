@@ -2,8 +2,8 @@
 import CustomForm from '@/components/custom-form/CustomForm';
 import FormInput from '@/components/custom-input/CustomInput';
 import { Button } from '@/components/ui/button';
+import { nextAPI } from '@/lib/axios';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -31,8 +31,7 @@ const RegisterForms = () => {
       return setPassErr('Password Unmatched');
 
     try {
-      const res = await axios.post('/api/register', { ...values });
-      const user = res.data();
+      const user = await nextAPI.post('/register', { ...values });
 
       if (user) {
         setPassErr('');
