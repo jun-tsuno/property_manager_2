@@ -14,6 +14,14 @@ export async function POST(req: Request) {
       throw new Error('User already exist');
     }
 
+    const userExist = await prisma.owner.findUnique({
+      where: { email: email },
+    });
+
+    if (userExist) {
+      throw new Error('User exist');
+    }
+
     const user = await prisma.owner.create({
       data: {
         name: userName,
