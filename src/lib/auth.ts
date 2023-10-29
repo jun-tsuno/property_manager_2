@@ -45,7 +45,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!user || !(await compare(credentials.password, user.password))) {
-          return null;
+          throw new Error('Email or Password is incorrect');
         }
 
         return {

@@ -46,7 +46,7 @@ const TopPage = () => {
                 width={0}
                 height={0}
                 sizes='100vh'
-                className='absolute top-[-10%] w-[30%] shadow-xl shadow-black/30 md:w-1/3 '
+                className='absolute top-[-20%] w-[30%] shadow-xl shadow-black/30 md:w-1/3 '
               />
             </div>
             <div className='w-[80%] max-w-[500px] bg-navy px-5 py-20 text-center text-white'>

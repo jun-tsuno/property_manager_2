@@ -8,6 +8,11 @@ Rental housing and shared housing are very widespread in Canada. Some of those o
 
 ## Demo
 
+https://property-manager-2.vercel.app/
+
+Demo Account
+{ email: hoge@example.com, password: password }
+
 ## Built With
 
 - `Nextjs: 13.4.3`

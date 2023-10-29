@@ -36,6 +36,10 @@ const LoginForms = () => {
       });
       setLoading(false);
 
+      if (res?.error) {
+        throw new Error(res.error);
+      }
+
       router.push('/dashboard');
     } catch (error: unknown) {
       setLoading(false);
