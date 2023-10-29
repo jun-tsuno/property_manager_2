@@ -67,6 +67,7 @@ const AvatarSelectModal = ({ tenant }: AvatarSelectModal) => {
                     width={0}
                     height={0}
                     sizes='100vw'
+                    priority
                     className='h-14 w-14 rounded-full object-cover object-center'
                   />
                 </button>
