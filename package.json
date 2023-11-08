@@ -13,7 +13,8 @@
     "gen": "prisma db push",
     "push": "prisma db push",
     "studio": "prisma studio",
-    "seed": "prisma db seed"
+    "seed": "prisma db seed",
+    "test": "jest --watch --coverage"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"commonjs\"} prisma/seed.ts"
@@ -56,16 +57,19 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.1",
+    "@types/jest": "^29.5.8",
     "husky": "^8.0.3",
-    "jest": "^29.5.0",
-    "jest-environment-jsdom": "^29.5.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
     "prettier-plugin-organize-imports": "^3.2.2",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "prisma": "^4.15.0",
+    "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1"
   }
 }
