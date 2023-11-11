@@ -21,6 +21,7 @@ Demo Account
 - `TypeScript`
 - `PostgreSQL`
 - `Prisma`
+- `Jest/React Testing Library`
 - `zod`
 - `shadcn UI`
 - `tailwindCSS`
