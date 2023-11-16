@@ -1,17 +1,25 @@
 # Property Management App
 
-<p style="text-align: center">
-<img width="600" alt="Screenshot" src="https://github.com/jun-tsuno/mysql_note_app/assets/110567844/2b5c615b-5c8d-4910-bb8c-f22284a29620">
-</p>
+https://github.com/jun-tsuno/property_manager_2/assets/110567844/85de17bd-8528-419c-99ac-dfef68a29b00
+
+🚀 https://property-manager-2.vercel.app/
+
+```
+Demo Account
+email: hoge@example.com
+password: password
+```
+
+## Why?
 
 Rental housing and shared housing are very widespread in Canada. Some of those owners have multiple homes in various locations, which must be a hassle to manage the renters and whether or not they pay the monthly rent charge. This app is for those who want to smartly handle and manage their properties! No more paper!
 
-## Demo
+## Feature
 
-https://property-manager-2.vercel.app/
-
-Demo Account
-{ email: hoge@example.com, password: password }
+- Add, Delete, Update house & tenant information.
+- Utilize TanStack Query to fetch cached data, and mutate data when it's updated.
+- Following SEO practices, optimize images, fonts, and module import so that the app runs efficiently.
+- Interact with PostgreSQL database through Prisma ORM.
 
 ## Built With
 
@@ -26,12 +34,47 @@ Demo Account
 - `shadcn UI`
 - `tailwindCSS`
 
-## Feature
+## ER
 
-- Add, Delete, Update house & tenant information.
-- Utilize TanStack Query to fetch cached data, and mutate data when it's updated.
-- Following SEO practices, optimize images, fonts, and module import so that the app runs efficiently.
-- Interact with PostgreSQL database through Prisma ORM.
+```mermaid
+erDiagram
+
+  "Owner" {
+    String id "🗝️"
+    String name
+    String email
+    String password
+    DateTime createdAt
+    DateTime updatedAt
+    }
+
+  "House" {
+    String id "🗝️"
+    String houseName
+    String location
+    DateTime createdAt
+    DateTime updatedAt
+    }
+
+  "Tenant" {
+    String id "🗝️"
+    String name
+    String email
+    Int roomId "❓"
+    String phone "❓"
+    Int fee
+    DateTime startDate
+    DateTime endDate "❓"
+    String avatar "❓"
+    DateTime createdAt
+    DateTime updatedAt
+    }
+
+    "Owner" o{--}o "House" : "house"
+    "House" o|--|| "Owner" : "owner"
+    "House" o{--}o "Tenant" : "tenant"
+    "Tenant" o|--|| "House" : "house"
+```
 
 ## Challenge
 
