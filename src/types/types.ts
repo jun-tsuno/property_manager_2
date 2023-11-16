@@ -1,8 +1,4 @@
-import { House, Payment, Tenant } from '@prisma/client';
-
-export type TenantWithPayment = Tenant & {
-  payment: Pick<Payment, 'id'>[];
-};
+import { House, Tenant } from '@prisma/client';
 
 export type HouseWithTenant = House & {
   tenant: Pick<Tenant, 'id'>[];
