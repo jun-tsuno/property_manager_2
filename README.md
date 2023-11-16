@@ -1,14 +1,19 @@
 # Property Management App
 
-https://github.com/jun-tsuno/property_manager_2/assets/110567844/85de17bd-8528-419c-99ac-dfef68a29b00
+Deployed Link ➡️ https://property-manager-2.vercel.app/
 
-🚀 https://property-manager-2.vercel.app/
+<p style="text-align: center">
+<img width="600" alt="Screenshot" src="https://github.com/jun-tsuno/mysql_note_app/assets/110567844/2b5c615b-5c8d-4910-bb8c-f22284a29620">
+</p>
+
+## Demo
 
 ```
-Demo Account
 email: hoge@example.com
 password: password
 ```
+
+https://github.com/jun-tsuno/property_manager_2/assets/110567844/85de17bd-8528-419c-99ac-dfef68a29b00
 
 ## Why?
 
